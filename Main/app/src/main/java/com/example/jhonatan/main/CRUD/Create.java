@@ -1,4 +1,4 @@
-package com.example.jhonatan.main.CRUD;
+package com.example.jhonatan.main.crud;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

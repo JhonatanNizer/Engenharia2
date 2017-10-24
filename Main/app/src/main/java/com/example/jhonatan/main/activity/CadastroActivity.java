@@ -1,15 +1,14 @@
-package com.example.jhonatan.main;
+package com.example.jhonatan.main.activity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import com.example.jhonatan.main.R;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -19,12 +18,11 @@ public class CadastroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-
-        editName = (EditText)findViewById(R.id.editText);
+        editName = (EditText)findViewById(R.id.edit_text_nome);
     }
 
     protected void voltarMain(View view){
-        Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent1 = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent1);
     }
 

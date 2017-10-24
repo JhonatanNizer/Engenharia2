@@ -1,7 +1,9 @@
-package com.example.jhonatan.main;
+package com.example.jhonatan.main.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.jhonatan.main.R;
 
 public class MenuPrincipalActivity extends AppCompatActivity {
 

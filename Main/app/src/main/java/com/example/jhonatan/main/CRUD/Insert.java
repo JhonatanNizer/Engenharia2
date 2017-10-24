@@ -1,11 +1,11 @@
-package com.example.jhonatan.main.CRUD;
+package com.example.jhonatan.main.crud;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.jhonatan.main.Pessoa;
+import com.example.jhonatan.main.dominio.Pessoa;
 
 public class Insert extends SQLiteOpenHelper {
 

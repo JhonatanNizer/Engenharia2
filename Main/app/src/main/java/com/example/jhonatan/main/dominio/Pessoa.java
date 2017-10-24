@@ -1,4 +1,4 @@
-package com.example.jhonatan.main;
+package com.example.jhonatan.main.dominio;
 
 import java.util.Date;
 
