@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">GoPlay</string>
+
+    <!-- MainActivity -->
+    <string name="button_login">Login</string>
+    <string name="button_register">Registrar</string>
+    <string name="hint_email">E-mail</string>
+    <string name="hint_password">Senha</string>
+    <string name="hint_name">Nome</string>
+    <string name="hint_emailConfirm">Confirmar email</string>
+    <string name="hint_confirmPassword">Confirmar senha</string>
+    <string name="button_save">Salvar</string>
+    <string name="button_back">Voltar</string>
+
+    <!-- RegisterActivity -->
+
+
 </resources>

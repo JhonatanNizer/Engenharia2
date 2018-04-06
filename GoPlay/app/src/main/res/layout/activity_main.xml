@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nizer01.goplay.MainActivity">
+    tools:context="com.example.nizer01.goplay.activity.MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView_logo"
+        android:layout_width="159dp"
+        android:layout_height="166dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/editText_login"
@@ -15,12 +29,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="E-mail"
+        android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,13 +45,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="textPassword"
+        android:hint="@string/hint_password"
+        android:inputType="text|textPassword"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_login"
-
-        android:hint="Senha"
-        android:textColor="@color/colorPrimary" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_login" />
 
     <Button
         android:id="@+id/button_login"
@@ -47,8 +59,9 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="8dp"
         android:elevation="0dp"
-        android:text="Login"
-        android:textColor="@color/colorSecondary"
+        android:text="@string/button_login"
+        android:textColor="@color/colorSecondaryDark"
+        android:onClick="onClickLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_password" />
 
@@ -58,8 +71,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
         android:layout_marginTop="8dp"
-        android:text="Registrar"
-        android:textColor="@color/colorSecondary"
+        android:text="@string/button_register"
+        android:textColor="@color/colorSecondaryDark"
+        android:onClick="onClickRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_password" />
 
