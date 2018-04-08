@@ -11,6 +11,7 @@
     <string name="hint_confirmPassword">Confirmar senha</string>
     <string name="button_save">Salvar</string>
     <string name="button_back">Voltar</string>
+    <string name="imageView_logoGoplay">logo</string>
 
     <!-- RegisterActivity -->
 

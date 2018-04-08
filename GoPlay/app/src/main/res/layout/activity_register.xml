@@ -35,14 +35,16 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView_logo" />
 
     <EditText
-        android:id="@+id/editText_date"
+        android:id="@+id/editText_birthDate"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="date"
+        android:editable="false"
+        android:onClick="onClickBirthDate"
+        android:hint="Data de Nascimento"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +63,7 @@
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_date" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_birthDate" />
 
     <EditText
         android:id="@+id/editText_confirmEmail"
