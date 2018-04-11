@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">GoPlay</string>
 
-    <!-- MainActivity -->
-    <string name="button_login">Login</string>
+    <string name="app_name">GoPlay</string>
+    <string name="button_login">Entrar</string>
     <string name="button_register">Registrar</string>
     <string name="hint_email">E-mail</string>
     <string name="hint_password">Senha</string>
@@ -12,8 +11,5 @@
     <string name="button_save">Salvar</string>
     <string name="button_back">Voltar</string>
     <string name="imageView_logoGoplay">logo</string>
-
-    <!-- RegisterActivity -->
-
 
 </resources>
