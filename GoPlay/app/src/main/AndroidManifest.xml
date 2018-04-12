@@ -20,7 +20,8 @@
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.CreateEventActivity" />
         <activity android:name=".activity.SetTimeActivity" />
-        <activity android:name=".activity.SetDateActivity"></activity>
+        <activity android:name=".activity.SetDateActivity" />
+        <activity android:name=".activity.FinishEventCreationActivity"></activity>
     </application>
 
 </manifest>

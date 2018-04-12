@@ -1,15 +1,31 @@
 <resources>
 
-    <string name="app_name">GoPlay</string>
-    <string name="button_login">Entrar</string>
-    <string name="button_register">Registrar</string>
-    <string name="hint_email">E-mail</string>
-    <string name="hint_password">Senha</string>
-    <string name="hint_name">Nome</string>
-    <string name="hint_emailConfirm">Confirmar email</string>
-    <string name="hint_confirmPassword">Confirmar senha</string>
-    <string name="button_save">Salvar</string>
-    <string name="button_back">Voltar</string>
-    <string name="imageView_logoGoplay">logo</string>
+    <string name="app_name">                GoPlay</string>
+    <string name="button_login">            Entrar</string>
+    <string name="button_register">         Registrar</string>
+    <string name="hint_email">              E-mail</string>
+    <string name="hint_password">           Senha</string>
+    <string name="hint_name">               Nome</string>
+    <string name="hint_emailConfirm">       Confirmar email</string>
+    <string name="hint_confirmPassword">    Confirmar senha</string>
+    <string name="button_save">             Salvar</string>
+    <string name="button_back">             Voltar</string>
+    <string name="imageView_logoGoplay">    logo</string>
+    <string name="hint_eventName">          Nome do Evento</string>
+    <string name="hint_eventDescription">   Descrição</string>
+    <string name="hint_eventCity">          Cidade</string>
+    <string name="hint_eventLocal">         Local</string>
+    <string name="hint_minPlayers">         Min Jogadores</string>
+    <string name="hint_maxPlayers">         Max Jogadores</string>
+    <string name="hint_editMinMaxPlayers">  Personalizar Min-Max Jogadores</string>
+    <string name="button_cancel">           Cancelar</string>
+    <string name="button_continue">         Continuar</string>
+    <string name="button_createEvent">      Criar Evento</string>
+    <string name="button_listEvents">       Listar Eventos</string>
+    <string name="textView_nextEvents">     Próximos Eventos</string>
+    <string name="hint_start">              Início</string>
+    <string name="hint_finish">             Término</string>
+    <string name="radio_setStartTime">      Selecionar Hora de Início</string>
+    <string name="radio_setFinishTime">     Selecionar Hora de Término</string>
 
 </resources>

@@ -107,7 +107,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Nome do Evento"
+        android:hint="@string/hint_eventName"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -122,7 +122,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView_sport"
+        app:layout_constraintStart_toEndOf="@+id/imageView_sportIcon"
         app:layout_constraintTop_toBottomOf="@+id/editText_eventDescription" />
 
     <EditText
@@ -133,7 +133,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Descrição"
+        android:hint="@string/hint_eventDescription"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -148,7 +148,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Cidade"
+        android:hint="@string/hint_eventCity"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -163,15 +163,15 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Local"
+        android:hint="@string/hint_eventLocal"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_maxPlayers" />
 
     <ImageView
-        android:id="@+id/imageView_sport"
+        android:id="@+id/imageView_sportIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -181,60 +181,60 @@
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/editText_minPlayers"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Min Jogadores"
+        android:hint="@string/hint_minPlayers"
         android:inputType="numberSigned"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_setMinMaxPlayers" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/editText_maxPlayers"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Max Jogadores"
+        android:hint="@string/hint_maxPlayers"
         android:inputType="numberSigned"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_setMinMaxPlayers" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBox_setMinMaxPlayers"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Personalizar Min-Max Jogadores"
+        android:text="@string/hint_editMinMaxPlayers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_selectSport" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Cancelar"
         android:onClick="onClickCancelar"
+        android:text="@string/button_cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_eventCity" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_continue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:text="Continuar"
         android:onClick="onClickContinuar"
+        android:text="@string/button_continue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_eventCity" />
 
