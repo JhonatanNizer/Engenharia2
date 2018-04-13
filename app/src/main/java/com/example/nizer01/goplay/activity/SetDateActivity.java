@@ -19,10 +19,8 @@ public class SetDateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_date);
-
         CalendarView cv = findViewById(R.id.calendarView);
         final TextView tv = findViewById(R.id.textView_nextEvents);
-
         cv.setOnDateChangeListener(new CalendarView.OnDateChangeListener(){
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 tv.setText("Dia: " + dayOfMonth + " Mes: " + month + " Ano:" + year);
@@ -31,7 +29,6 @@ public class SetDateActivity extends AppCompatActivity {
                 dayS = String.valueOf(dayOfMonth);
             }
         });
-
     }
 
     public void onClickContinuar(View view) {
@@ -45,7 +42,6 @@ public class SetDateActivity extends AppCompatActivity {
         intent.putExtra("maxPlayers", getIntent().getStringExtra("maxPlayers"));
         intent.putExtra("eventLocal", getIntent().getStringExtra("eventLocal"));
         intent.putExtra("eventCity", getIntent().getStringExtra("eventCity"));
-
 
         //Data from date
         intent.putExtra("year", yearS);
