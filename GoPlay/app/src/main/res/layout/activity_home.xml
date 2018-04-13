@@ -17,7 +17,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
     </LinearLayout>
 
     <LinearLayout
@@ -30,8 +29,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
-
     </LinearLayout>
 
     <ImageButton
@@ -115,7 +112,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_listEvents" />
 
-
     <Button
         android:id="@+id/button_listEvents"
         android:layout_width="0dp"
@@ -125,6 +121,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/button_listEvents"
         android:textColor="@color/colorSecondaryDark"
+        android:onClick="onClickListEvents"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

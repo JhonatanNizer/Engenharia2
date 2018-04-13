@@ -80,14 +80,12 @@ public class SetTimeActivity extends AppCompatActivity {
         intent.putExtra("eventLocal", getIntent().getStringExtra("eventLocal"));
         intent.putExtra("eventCity", getIntent().getStringExtra("eventCity"));
 
-
         //Data from Date
         intent.putExtra("year", getIntent().getStringExtra("year"));
         intent.putExtra("month", getIntent().getStringExtra("month"));
         intent.putExtra("day", getIntent().getStringExtra("day"));
 
-        //Data from Finish
-//        intent.putExtra("startHour", String.valueOf(startHour));
+        //Data from setTime
         intent.putExtra("startHour", String.valueOf(startHour));
         intent.putExtra("startMin", String.valueOf(startMin));
         intent.putExtra("finishHour", String.valueOf(finishHour));

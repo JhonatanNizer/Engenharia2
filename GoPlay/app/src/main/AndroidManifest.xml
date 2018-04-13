@@ -21,7 +21,8 @@
         <activity android:name=".activity.CreateEventActivity" />
         <activity android:name=".activity.SetTimeActivity" />
         <activity android:name=".activity.SetDateActivity" />
-        <activity android:name=".activity.FinishEventCreationActivity"></activity>
+        <activity android:name=".activity.FinishEventCreationActivity" />
+        <activity android:name=".activity.ListEvents"></activity>
     </application>
 
 </manifest>
