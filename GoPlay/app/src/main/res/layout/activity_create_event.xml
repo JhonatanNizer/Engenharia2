@@ -7,97 +7,97 @@
     android:layout_height="match_parent"
     tools:context="com.example.nizer01.goplay.activity.CreateEventActivity">
 
-    <LinearLayout
-        android:id="@+id/toolbaTop"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorSecondaryDark"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/toolbaTop"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:background="@color/colorSecondaryDark"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:weightSum="3"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent">-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
-    <LinearLayout
-        android:id="@+id/toolbarBottom"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorSecondaryDark"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:id="@+id/toolbarBottom"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:background="@color/colorSecondaryDark"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:weightSum="3"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent">-->
+    <!--</LinearLayout>-->
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@color/colorSecondaryDark"
-        android:elevation="24dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbarBottom"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
-        app:layout_constraintStart_toEndOf="@+id/imageButton4"
-        app:srcCompat="@drawable/ic_map_marker_radius" />
+    <!--<ImageButton-->
+        <!--android:id="@+id/imageButton"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:background="@color/colorSecondaryDark"-->
+        <!--android:elevation="24dp"-->
+        <!--android:scaleType="fitXY"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/toolbarBottom"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/imageButton2"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/imageButton4"-->
+        <!--app:srcCompat="@drawable/ic_map_marker_radius" />-->
 
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/colorSecondaryDark"
-        android:clickable="true"
-        android:elevation="24dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_settings"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <!--<ImageButton-->
+        <!--android:id="@+id/imageButton3"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:background="@color/colorSecondaryDark"-->
+        <!--android:clickable="true"-->
+        <!--android:elevation="24dp"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@drawable/ic_settings"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent" />-->
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
-        android:background="@color/colorSecondaryDark"
-        android:clickable="true"
-        android:elevation="24dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_account_multiple"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton3" />
+    <!--<ImageButton-->
+        <!--android:id="@+id/imageButton2"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_marginEnd="32dp"-->
+        <!--android:background="@color/colorSecondaryDark"-->
+        <!--android:clickable="true"-->
+        <!--android:elevation="24dp"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@drawable/ic_account_multiple"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/imageButton3" />-->
 
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:background="@color/colorSecondaryDark"
-        android:clickable="true"
-        android:elevation="24dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_magnify"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5" />
+    <!--<ImageButton-->
+        <!--android:id="@+id/imageButton4"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_marginStart="32dp"-->
+        <!--android:background="@color/colorSecondaryDark"-->
+        <!--android:clickable="true"-->
+        <!--android:elevation="24dp"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@drawable/ic_magnify"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/imageButton5" />-->
 
-    <ImageButton
-        android:id="@+id/imageButton5"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:background="@color/colorSecondaryDark"
-        android:cropToPadding="false"
-        android:elevation="24dp"
-        android:focusableInTouchMode="?android:attr/windowOverscan"
-        android:focusedByDefault="?android:attr/windowOverscan"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_home"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <!--<ImageButton-->
+        <!--android:id="@+id/imageButton5"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:background="@color/colorSecondaryDark"-->
+        <!--android:cropToPadding="false"-->
+        <!--android:elevation="24dp"-->
+        <!--android:focusableInTouchMode="?android:attr/windowOverscan"-->
+        <!--android:focusedByDefault="?android:attr/windowOverscan"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@drawable/ic_home"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent" />-->
 
     <EditText
         android:id="@+id/editText_eventName"

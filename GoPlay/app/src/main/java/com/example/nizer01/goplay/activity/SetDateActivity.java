@@ -40,11 +40,12 @@ public class SetDateActivity extends AppCompatActivity {
         //Data from CreateEventActivity
         intent.putExtra("eventName", getIntent().getStringExtra("eventName"));
         intent.putExtra("eventDescription", getIntent().getStringExtra("eventDescription"));
-        intent.putExtra("selectedSport", getIntent().getStringExtra("selectedSport"));
+        intent.putExtra("sportSelected", getIntent().getStringExtra("sportSelected"));
         intent.putExtra("minPlayers", getIntent().getStringExtra("minPlayers"));
         intent.putExtra("maxPlayers", getIntent().getStringExtra("maxPlayers"));
         intent.putExtra("eventLocal", getIntent().getStringExtra("eventLocal"));
         intent.putExtra("eventCity", getIntent().getStringExtra("eventCity"));
+
 
         //Data from date
         intent.putExtra("year", yearS);

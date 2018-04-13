@@ -68,9 +68,31 @@ public class SetTimeActivity extends AppCompatActivity {
     }
 
     public void onClickContinue(View view){
+
         Intent intent = new Intent(this, FinishEventCreationActivity.class);
 
+        //Data from CreateEventActivity
+        intent.putExtra("eventName", getIntent().getStringExtra("eventName"));
+        intent.putExtra("eventDescription", getIntent().getStringExtra("eventDescription"));
+        intent.putExtra("sportSelected", getIntent().getStringExtra("sportSelected"));
+        intent.putExtra("minPlayers", getIntent().getStringExtra("minPlayers"));
+        intent.putExtra("maxPlayers", getIntent().getStringExtra("maxPlayers"));
+        intent.putExtra("eventLocal", getIntent().getStringExtra("eventLocal"));
+        intent.putExtra("eventCity", getIntent().getStringExtra("eventCity"));
 
+
+        //Data from Date
+        intent.putExtra("year", getIntent().getStringExtra("year"));
+        intent.putExtra("month", getIntent().getStringExtra("month"));
+        intent.putExtra("day", getIntent().getStringExtra("day"));
+
+        //Data from Finish
+//        intent.putExtra("startHour", String.valueOf(startHour));
+        intent.putExtra("startHour", String.valueOf(startHour));
+        intent.putExtra("startMin", String.valueOf(startMin));
+        intent.putExtra("finishHour", String.valueOf(finishHour));
+        intent.putExtra("finishMin", String.valueOf(finishMin));
+        System.out.println(startHour);
 
         startActivity(intent);
     }
