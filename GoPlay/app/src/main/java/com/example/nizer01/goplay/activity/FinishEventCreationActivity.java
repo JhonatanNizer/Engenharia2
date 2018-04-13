@@ -1,6 +1,5 @@
 package com.example.nizer01.goplay.activity;
 
-import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +9,6 @@ import com.example.nizer01.goplay.R;
 
 public class FinishEventCreationActivity extends AppCompatActivity {
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +41,12 @@ public class FinishEventCreationActivity extends AppCompatActivity {
         tv.setText(
                 getIntent().getStringExtra("finishHour") + ':' +
                 getIntent().getStringExtra("finishMin"));
+
     }
+
+
 
     public void onClickCancelar(View view) {
         finish();
     }
-
 }
