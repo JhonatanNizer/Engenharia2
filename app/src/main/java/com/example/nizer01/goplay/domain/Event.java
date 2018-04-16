@@ -5,12 +5,6 @@ import java.sql.Timestamp;
 
 public class Event {
 
-    //private Activity activity;
-    //private Local local;
-
-    private String City;
-    private String Local;
-    private String Sport;
     private String name;
     private String description;
     private String requirements;
@@ -20,22 +14,8 @@ public class Event {
     private int maxPlayers;
     private int minPlayers;
     private double investiments;
-
-    public String getCity() {
-        return City;
-    }
-
-    public void setCity(String city) {
-        this.City = city;
-    }
-
-    public String getLocal() {return Local;}
-
-    public void setLocal(String local) {Local = local;}
-
-    public String getSport() {return Sport;}
-
-    public void setSport(String sport) {Sport = sport;}
+    private Activity activity;
+    private Local local;
 
     public String getName() {
         return name;
@@ -109,4 +89,13 @@ public class Event {
         this.investiments = investiments;
     }
 
+    public Activity getActivity() { return activity; }
+
+    public void setActivity(Activity activity) { this.activity = activity; }
+
+    public Local getLocal() { return local; }
+
+    public void setLocal(Local local) { this.local = local; }
+
+    public String toString(){ return this.name; }
 }

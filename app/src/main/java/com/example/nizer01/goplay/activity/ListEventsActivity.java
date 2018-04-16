@@ -24,5 +24,6 @@ public class ListEventsActivity extends AppCompatActivity {
         rvLista.setLayoutManager(new LinearLayoutManager(this));
         */
 
+
     }
 }

@@ -69,6 +69,7 @@ public class FinishEventCreationActivity extends AppCompatActivity {
     }
 
     private void dataToObject(){
+
         eventName = getIntent().getStringExtra("eventName");
         eventDescription = getIntent().getStringExtra("eventDescription");
         sportSelected = getIntent().getStringExtra("sportSelected");
@@ -100,8 +101,6 @@ public class FinishEventCreationActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        System.out.println("Hora de inicio " + startTime);
-        System.out.println("Hora de término " + finishTime);
 
         //PRONTO... AGORA É SÓ CRIAR UM OBJETO EVENTO COM OS DADOS FORMATADOS ACIMA E SALVAR NO BANCO
 
