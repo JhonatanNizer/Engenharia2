@@ -12,7 +12,7 @@ public class Event {
     private Timestamp startTime;
     private Timestamp duration;
     private Timestamp endTime;
-    private int status;
+    private String status;
     private int maxPlayers;
     private int minPlayers;
     private double investiments;
@@ -64,11 +64,11 @@ public class Event {
         this.endTime = endTime;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

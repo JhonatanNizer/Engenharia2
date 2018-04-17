@@ -17,10 +17,9 @@ public class ListEventsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_events);
 
         RecyclerView rvLista = findViewById(R.id.rvList);
-        EventDao eventdao = new EventDao();
-        EventAdapter adaptador = new EventAdapter();
+
+        EventAdapter adaptador = new EventAdapter(EventDao.getLista());
         rvLista.setAdapter(adaptador);
         rvLista.setLayoutManager(new LinearLayoutManager(this));
-
     }
 }
