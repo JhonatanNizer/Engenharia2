@@ -10,6 +10,7 @@ public class User {
     private String password;
     private Date birthDate;
     private Character gender;
+    private Role role;
 
     public String getFirstName() {
         return firstName;
@@ -58,4 +59,9 @@ public class User {
     public void setGender(Character gender) {
         this.gender = gender;
     }
+
+    public Role getRole() { return role; }
+
+    public void setRole(Role role) { this.role = role; }
+
 }

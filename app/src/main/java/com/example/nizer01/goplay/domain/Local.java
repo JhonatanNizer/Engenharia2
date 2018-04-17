@@ -47,4 +47,5 @@ public class Local {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
 }

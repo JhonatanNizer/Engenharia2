@@ -2,6 +2,7 @@ package com.example.nizer01.goplay.domain;
 
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class Event {
 
@@ -9,6 +10,7 @@ public class Event {
     private String description;
     private String requirements;
     private Timestamp startTime;
+    private Timestamp duration;
     private Timestamp endTime;
     private int status;
     private int maxPlayers;
@@ -16,6 +18,7 @@ public class Event {
     private double investiments;
     private Activity activity;
     private Local local;
+    private ArrayList<User> users = new ArrayList<User>();
 
     public String getName() {
         return name;
@@ -48,6 +51,10 @@ public class Event {
     public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
+
+    public Timestamp getDuration() { return duration; }
+
+    public void setDuration(Timestamp duration) { this.duration = duration; }
 
     public Timestamp getEndTime() {
         return endTime;
@@ -98,4 +105,9 @@ public class Event {
     public void setLocal(Local local) { this.local = local; }
 
     public String toString(){ return this.name; }
+
+    public ArrayList<User> getUsers() { return users; }
+
+    public void setUsers(ArrayList<User> users) { this.users = users; }
+
 }

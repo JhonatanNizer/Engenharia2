@@ -4,6 +4,8 @@ public class Notification {
 
     private String title;
     private String description;
+    private User user;
+    private Event event;
 
     public String getTitle() {
         return title;
@@ -20,5 +22,13 @@ public class Notification {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public User getUser() { return user; }
+
+    public void setUser(User user) { this.user = user; }
+
+    public Event getEvent() { return event; }
+
+    public void setEvent(Event event) { this.event = event; }
 
 }

@@ -16,14 +16,11 @@ public class ListEventsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_events);
 
-        /*
         RecyclerView rvLista = findViewById(R.id.rvList);
         EventDao eventdao = new EventDao();
         EventAdapter adaptador = new EventAdapter();
         rvLista.setAdapter(adaptador);
         rvLista.setLayoutManager(new LinearLayoutManager(this));
-        */
-
 
     }
 }

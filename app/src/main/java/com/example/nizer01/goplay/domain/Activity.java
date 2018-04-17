@@ -38,4 +38,5 @@ public class Activity {
     public void setMinPlayers(int minPlayers) {
         this.minPlayers = minPlayers;
     }
+
 }

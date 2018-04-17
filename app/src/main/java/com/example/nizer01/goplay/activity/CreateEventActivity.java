@@ -61,7 +61,7 @@ public class CreateEventActivity extends AppCompatActivity {
         //eventAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //activitySpinner.setAdapter(eventAdapter);
 
-        /*List<String> spinnerArray =  new ArrayList<String>();
+        List<String> spinnerArray =  new ArrayList<String>();
         spinnerArray.add("Selecionar Atividade");
         spinnerArray.add(activity1.getName());
         spinnerArray.add(activity2.getName());
@@ -69,7 +69,7 @@ public class CreateEventActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         activitySpinner = (Spinner) findViewById(R.id.spinner_selectSport);
-        activitySpinner.setAdapter(adapter);*/
+        activitySpinner.setAdapter(adapter);
     }
 
     public void onClickContinuar(View view) {
