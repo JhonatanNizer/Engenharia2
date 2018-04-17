@@ -1,12 +1,16 @@
 package com.example.nizer01.goplay.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.nizer01.goplay.R;
+import com.example.nizer01.goplay.dao.EventDao;
+import com.example.nizer01.goplay.domain.Activity;
 import com.example.nizer01.goplay.domain.Event;
+import com.example.nizer01.goplay.domain.Local;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -32,8 +36,6 @@ public class FinishEventCreationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish_event_creation);
-
-        //dataToObject();
 
         TextView tv = findViewById(R.id.textView_name);
         tv.setText(getIntent().getStringExtra("eventName"));
@@ -64,12 +66,7 @@ public class FinishEventCreationActivity extends AppCompatActivity {
                 getIntent().getStringExtra("finishMin"));
     }
 
-    public void onClickCancelar(View view) {
-        finish();
-    }
-
-    private void dataToObject(){
-
+    public void onClickConfirmar(View view){
         eventName = getIntent().getStringExtra("eventName");
         eventDescription = getIntent().getStringExtra("eventDescription");
         sportSelected = getIntent().getStringExtra("sportSelected");
@@ -102,8 +99,46 @@ public class FinishEventCreationActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //PRONTO... AGORA É SÓ CRIAR UM OBJETO EVENTO COM OS DADOS FORMATADOS ACIMA E SALVAR NO BANCO
 
+        //-----------------Criação do Objeto Evento---------------
+        Local lc = new Local();
+        lc.setName(eventLocal);
+        lc.setDescription("Descrição do Local Selecionado");
+        lc.setCity(eventCity);
+        lc.setLatitude(1);
+        lc.setLatitude(1);
+
+        Activity ac = new Activity();
+        ac.setName(sportSelected);
+        ac.setDescription("Descrição do Esporte Selecionado");
+        ac.setMinPlayers(minPlayers);
+        ac.setMaxPlayers(maxPlayers);
+
+        Event ev = new Event();
+        ev.setName(eventName);
+        ev.setDescription("Descrição");
+        ev.setMinPlayers(ac.getMinPlayers());
+        ev.setMaxPlayers(ac.getMaxPlayers());
+        ev.setStatus("Programado");
+        ev.setLocal(lc);
+        ev.setActivity(ac);
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        try {
+            Date date = df.parse("17/04/2018 16:05");
+            long time = date.getTime();
+            ev.setStartTime(new Timestamp(time));
+            ev.setEndTime(new Timestamp(time));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        EventDao.createEvent(ev);
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickCancelar(View view) {
+        finish();
     }
 
 }
