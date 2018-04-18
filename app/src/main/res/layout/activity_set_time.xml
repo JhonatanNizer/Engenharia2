@@ -24,7 +24,7 @@
         android:editable="false"
         android:ems="10"
         android:focusable="false"
-        android:hint="@string/hint_start"
+        android:hint="Start time"
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/radioGroup"
@@ -39,7 +39,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:focusable="false"
-        android:hint="@string/hint_finish"
+        android:hint="Finish time"
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/radioGroup"
@@ -58,14 +58,14 @@
             android:layout_width="220dp"
             android:layout_height="50dp"
             android:onClick="onRadioButtonClicked"
-            android:text="@string/radio_setStartTime" />
+            android:text="Select start time" />
 
         <RadioButton
             android:id="@+id/radio_finishTime"
             android:layout_width="220dp"
             android:layout_height="50dp"
             android:onClick="onRadioButtonClicked"
-            android:text="@string/radio_setFinishTime" />
+            android:text="Select finish time" />
     </RadioGroup>
 
     <Button
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/button_continue"
+        android:text="@string/button.continue"
         android:onClick="onClickContinue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -86,7 +86,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:onClick="onClickVoltar"
-        android:text="@string/button_back"
+        android:text="@string/button.back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

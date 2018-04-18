@@ -18,7 +18,7 @@ public class Event {
     private double investiments;
     private Activity activity;
     private Local local;
-    private ArrayList<User> users = new ArrayList<User>();
+    private ArrayList<User> users;
 
     public String getName() {
         return name;

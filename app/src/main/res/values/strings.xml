@@ -1,31 +1,32 @@
 <resources>
 
-    <string name="app_name">                GoPlay</string>
-    <string name="button_login">            Entrar</string>
-    <string name="button_register">         Registrar</string>
-    <string name="hint_email">              E-mail</string>
-    <string name="hint_password">           Senha</string>
-    <string name="hint_name">               Nome</string>
-    <string name="hint_emailConfirm">       Confirmar email</string>
-    <string name="hint_confirmPassword">    Confirmar senha</string>
-    <string name="button_save">             Salvar</string>
-    <string name="button_back">             Voltar</string>
-    <string name="imageView_logoGoplay">    logo</string>
-    <string name="hint_eventName">          Nome do Evento</string>
-    <string name="hint_eventDescription">   Descrição</string>
-    <string name="hint_eventCity">          Cidade</string>
-    <string name="hint_eventLocal">         Local</string>
-    <string name="hint_minPlayers">         Min Jogadores</string>
-    <string name="hint_maxPlayers">         Max Jogadores</string>
-    <string name="hint_editMinMaxPlayers">  Personalizar Min-Max Jogadores</string>
-    <string name="button_cancel">           Cancelar</string>
-    <string name="button_continue">         Continuar</string>
-    <string name="button_createEvent">      Criar Evento</string>
-    <string name="button_listEvents">       Listar Eventos</string>
-    <string name="textView_nextEvents">     Próximos Eventos</string>
-    <string name="hint_start">              Início</string>
-    <string name="hint_finish">             Término</string>
-    <string name="radio_setStartTime">      Selecionar Hora de Início</string>
-    <string name="radio_setFinishTime">     Selecionar Hora de Término</string>
+    <string name="app.name">                GoPlay</string>
+
+    <string name="hint.name">               Name</string>
+    <string name="hint.lastname">           Last name</string>
+    <string name="hint.email">              E-mail</string>
+    <string name="hint.password">           Password</string>
+    <string name="hint.confirmpassword">    Confirm password</string>
+    <string name="hint.birthday">           Birthday</string>
+    <string name="hint.eventname">          Event name</string>
+    <string name="hint.eventdescription">   Event description</string>
+
+    <string name="textview.gender">         Gender</string>
+    <string name="textview.nextevents">     Next events</string>
+
+    <string name="radio.male">              Male</string>
+    <string name="radio.female">            Female</string>
+
+    <string name="button.register">         Register</string>
+    <string name="button.back">             Back</string>
+    <string name="button.cancel">           Cancel</string>
+    <string name="button.login">            Login</string>
+    <string name="button.continue">         Continue</string>
+    <string name="button.createevent">      Create Event</string>
+    <string name="button.listevents">       List Events</string>
+
+    <string name="no_field_can_be_empty">No field can be empty</string>
+    <string name="passwords_must_be_the_same">Password and password again field must be the same</string>
+    <string name="here_is_values">Here is values: %1$s</string>
 
 </resources>

@@ -17,7 +17,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
     </LinearLayout>
 
     <LinearLayout
@@ -30,8 +29,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
-
     </LinearLayout>
 
     <ImageButton
@@ -108,7 +105,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:onClick="onClickCreateEvent"
-        android:text="@string/button_createEvent"
+        android:text="@string/button.createevent"
         android:textColor="@color/colorSecondaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -123,7 +120,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/button_listEvents"
+        android:text="@string/button.listevents"
         android:textColor="@color/colorSecondaryDark"
         android:onClick="onClickListEvents"
         app:layout_constraintEnd_toEndOf="parent"
@@ -139,7 +136,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@color/colorSecondary"
-        android:text="@string/textView_nextEvents"
+        android:text="@string/textview.nextevents"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
@@ -157,5 +154,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_nextEvents" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Create event 2.0"
+        android:textColor="@color/colorSecondaryDark"
+        android:onClick="onClickCreateEvent2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_createEvent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -20,6 +20,11 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClickCreateEvent2(View view){
+        Intent intent = new Intent(this, CreateEventActivity2.class );
+        startActivity(intent);
+    }
+
     public void onClickListEvents(View view){
         Intent intent = new Intent(this, ListEventsActivity.class );
         startActivity(intent);
