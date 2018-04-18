@@ -1,5 +1,6 @@
 package com.example.nizer01.goplay.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -20,7 +21,12 @@ import java.util.Calendar;
 
 public class CreateEventActivity2 extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText firstnameEdittext,lastnameEdittext,emailEdittext,passEdittext,passAgainEdittext,birthdayEdittext;
+    private EditText firstnameEdittext;
+    private EditText lastnameEdittext;
+    private EditText emailEdittext;
+    private EditText passEdittext;
+    private EditText passAgainEdittext;
+    private EditText birthdayEdittext;
     private RadioGroup genderRadioGroup;
     private Button registerButton;
     private DatePickerDialog datePickerDialog;
@@ -61,27 +67,31 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
     }
 
-    private void showToastWithFormValues() {
-
+    private void confirmEvent() {
         String firstname=firstnameEdittext.getText().toString();
         String lastname=lastnameEdittext.getText().toString();
         String email=emailEdittext.getText().toString();
         String pass=passEdittext.getText().toString();
         String passAgain=passAgainEdittext.getText().toString();
         String birthday=birthdayEdittext.getText().toString();
-
         RadioButton selectedRadioButton=(RadioButton)findViewById(genderRadioGroup.getCheckedRadioButtonId());
         String gender=selectedRadioButton==null ? "":selectedRadioButton.getText().toString();
-
         if(!firstname.equals("")&&!lastname.equals("")&&!email.equals("")&&!pass.equals("")&&!passAgain.equals("")&&!birthday.equals("")&&!gender.equals("")){
             if(pass.equals(passAgain)){
                 Toast.makeText(this,getResources().getString(R.string.here_is_values,("\nFirstname:"+firstname+"\nLastname:"+lastname+"\nEmail:"+email+"\nBirthday:"+birthday+"\nGender:"+gender)),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
             }else{
                 Toast.makeText(this,getResources().getString(R.string.passwords_must_be_the_same),Toast.LENGTH_SHORT).show();
             }
         }else{
             Toast.makeText(this,getResources().getString(R.string.no_field_can_be_empty),Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void cancelEvent(){
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -91,9 +101,13 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
                 datePickerDialog.show();
                 break;
             case R.id.register_button:
-                showToastWithFormValues();
+                confirmEvent();
+                break;
+            case R.id.button_back:
+                cancelEvent();
                 break;
         }
     }
+
 
 }

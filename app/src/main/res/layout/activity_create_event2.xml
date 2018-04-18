@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:focusable="false"
             android:layout_marginTop="20dp"
+            android:onClick="onClickBirthday"
             android:hint="@string/hint.birthday"/>
 
         <LinearLayout
@@ -97,6 +98,16 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="@string/button.register"/>
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/button.back"/>
 
     </LinearLayout>
 

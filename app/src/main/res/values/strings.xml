@@ -25,8 +25,8 @@
     <string name="button.createevent">      Create Event</string>
     <string name="button.listevents">       List Events</string>
 
-    <string name="no_field_can_be_empty">No field can be empty</string>
+    <string name="no_field_can_be_empty">   No field can be empty</string>
     <string name="passwords_must_be_the_same">Password and password again field must be the same</string>
-    <string name="here_is_values">Here is values: %1$s</string>
+    <string name="here_is_values">          Here is values: %1$s</string>
 
 </resources>
