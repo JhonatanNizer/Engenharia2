@@ -78,14 +78,14 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         String gender=selectedRadioButton==null ? "":selectedRadioButton.getText().toString();
         if(!firstname.equals("")&&!lastname.equals("")&&!email.equals("")&&!pass.equals("")&&!passAgain.equals("")&&!birthday.equals("")&&!gender.equals("")){
             if(pass.equals(passAgain)){
-                Toast.makeText(this,getResources().getString(R.string.here_is_values,("\nFirstname:"+firstname+"\nLastname:"+lastname+"\nEmail:"+email+"\nBirthday:"+birthday+"\nGender:"+gender)),Toast.LENGTH_SHORT).show();
+                //deu boa
                 Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
             }else{
-                Toast.makeText(this,getResources().getString(R.string.passwords_must_be_the_same),Toast.LENGTH_SHORT).show();
+                //pass diferente
             }
         }else{
-            Toast.makeText(this,getResources().getString(R.string.no_field_can_be_empty),Toast.LENGTH_SHORT).show();
+            //algo vazio
         }
     }
 

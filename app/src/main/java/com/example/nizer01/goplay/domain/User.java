@@ -1,5 +1,6 @@
 package com.example.nizer01.goplay.domain;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class User {
@@ -8,7 +9,7 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private Date birthDate;
+    private Timestamp birthDate;
     private Character gender;
     private Role role;
 
@@ -44,11 +45,11 @@ public class User {
         this.password = password;
     }
 
-    public Date getBirthDate() {
+    public Timestamp getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(Timestamp birthDate) {
         this.birthDate = birthDate;
     }
 

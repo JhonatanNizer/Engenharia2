@@ -14,9 +14,16 @@ import android.widget.Toast;
 
 import com.example.nizer01.goplay.R;
 import com.example.nizer01.goplay.activity.MainActivity;
+import com.example.nizer01.goplay.dao.UserDao;
+import com.example.nizer01.goplay.domain.Role;
+import com.example.nizer01.goplay.domain.User;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -24,8 +31,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText firstnameEdittext;
     private EditText lastnameEdittext;
     private EditText emailEdittext;
-    private EditText passEdittext;
-    private EditText passAgainEdittext;
+    private EditText passwordEdittext;
+    private EditText passwordrepeatEdittext;
     private EditText birthdayEdittext;
     private RadioGroup genderRadioGroup;
     private Button registerButton;
@@ -44,8 +51,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         firstnameEdittext=(EditText)findViewById(R.id.edittext_register_name);
         lastnameEdittext=(EditText)findViewById(R.id.edittext_register_lastname);
         emailEdittext=(EditText)findViewById(R.id.edittext_register_email);
-        passEdittext=(EditText)findViewById(R.id.edittext_register_password);
-        passAgainEdittext=(EditText)findViewById(R.id.edittext_register_confirmpassword);
+        passwordEdittext=(EditText)findViewById(R.id.edittext_register_password);
+        passwordrepeatEdittext=(EditText)findViewById(R.id.edittext_register_confirmpassword);
         birthdayEdittext=(EditText)findViewById(R.id.edittext_register_birthday);
         genderRadioGroup=(RadioGroup)findViewById(R.id.radiogroup_register_gender);
         registerButton=(Button)findViewById(R.id.button_register_register);
@@ -56,6 +63,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         birthdayEdittext.setOnClickListener(this);
         registerButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.edittext_register_birthday:
+                onClickEdittextBirthday();
+                break;
+            case R.id.button_register_register:
+                onClickButtonRegister();
+                break;
+            case R.id.button_register_back:
+                onClickButtonBack();
+                break;
+        }
     }
 
     private void onClickEdittextBirthday() {
@@ -74,19 +96,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String firstname=firstnameEdittext.getText().toString();
         String lastname=lastnameEdittext.getText().toString();
         String email=emailEdittext.getText().toString();
-        String pass= passEdittext.getText().toString();
-        String passAgain=passAgainEdittext.getText().toString();
+        String password= passwordEdittext.getText().toString();
+        String passwordrepeat=passwordrepeatEdittext.getText().toString();
         String birthday=birthdayEdittext.getText().toString();
         RadioButton selectedRadioButton=(RadioButton)findViewById(genderRadioGroup.getCheckedRadioButtonId());
         String gender=selectedRadioButton==null ? "":selectedRadioButton.getText().toString();
-        if(!firstname.equals("")&&!lastname.equals("")&&!email.equals("")&&!pass.equals("")&&!passAgain.equals("")&&!birthday.equals("")&&!gender.equals("")){
-            if(pass.equals(passAgain)){
-                System.out.println("Deu boa");
+
+        if(!firstname.equals("")&&!lastname.equals("")&&!email.equals("")&&!password.equals("")&&!passwordrepeat.equals("")&&!birthday.equals("")&&!gender.equals("")){
+            if(password.equals(passwordrepeat)){
+                createUserObject(email, password, firstname, lastname, birthday, gender);
+                Toast.makeText(this, R.string.toast_registercompleted, Toast.LENGTH_LONG).show();
+                finish();
             }else{
-                System.out.println("Password deu ruim");
+                Toast.makeText(this, R.string.toast_passwordsdifferent, Toast.LENGTH_SHORT).show();
             }
         }else{
-            System.out.println("Tem algo vazio");
+            Toast.makeText(this, R.string.toast_emptyfield, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -94,19 +119,29 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         finish();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.edittext_register_birthday:
-                onClickEdittextBirthday();
-                break;
-            case R.id.button_register_register:
-                onClickButtonRegister();
-                break;
-            case R.id.button_register_back:
-                onClickButtonBack();
-                break;
+    private void createUserObject(String email, String password, String firstname, String lastname, String birthday, String gender){
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setFirstName(firstname);
+        user.setLastName(lastname);
+        try {
+            DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+            Date date = df.parse(birthday);
+            long time = date.getTime();
+            user.setBirthDate(new Timestamp(time));
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+        if(gender == "Male" || gender == "Masculino")
+            user.setGender('M');
+        else{
+            user.setGender('F');
+        }
+        Role role = new Role();
+        role.setName("Normal user");
+        role.setDescription("Can create and participate of events");
+        UserDao.saveUser(user);
     }
 
 }

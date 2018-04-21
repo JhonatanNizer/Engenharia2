@@ -8,16 +8,12 @@ public class UserDao {
 
     private static ArrayList<User> userList = new ArrayList<>();
 
-    public static void saveUser(User user){
-        userList.add(user);
-    }
+    public static void saveUser(User user){ userList.add(user); }
 
     public static User loadUser(){
         User user = new User();
         return user;
     }
 
-    public static ArrayList<User> loadUserList() {
-        return userList;
-    }
+    public static ArrayList<User> loadUserList() { return userList; }
 }
