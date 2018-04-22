@@ -57,9 +57,7 @@ public class User {
         return gender;
     }
 
-    public void setGender(Character gender) {
-        this.gender = gender;
-    }
+    public void setGender(Character gender) { this.gender = gender; }
 
     public Role getRole() { return role; }
 
