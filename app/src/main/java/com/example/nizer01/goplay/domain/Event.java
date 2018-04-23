@@ -9,13 +9,13 @@ public class Event {
     private String name;
     private String description;
     private String requirements;
+    private String cost;
     private Timestamp startTime;
     private Timestamp duration;
     private Timestamp endTime;
     private String status;
     private int maxPlayers;
     private int minPlayers;
-    private double investiments;
     private Activity activity;
     private Local local;
     private ArrayList<User> users;
@@ -88,12 +88,12 @@ public class Event {
         this.minPlayers = minPlayers;
     }
 
-    public double getInvestiments() {
-        return investiments;
+    public String getInvestiments() {
+        return cost;
     }
 
-    public void setInvestiments(double investiments) {
-        this.investiments = investiments;
+    public void setInvestiments(String cost) {
+        this.cost = cost;
     }
 
     public Activity getActivity() { return activity; }

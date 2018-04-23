@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,104 +11,128 @@
         android:padding="20dp">
 
         <EditText
-            android:id="@+id/firstname_edittext"
+            android:id="@+id/editText_createEvent_eventName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint.name" />
+            android:hint="Name"
+            android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/lastname_edittext"
+            android:id="@+id/editText_createEvent_eventDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_marginTop="20dp"
-            android:hint="@string/hint.lastname" />
-
-        <EditText
-            android:id="@+id/email_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:inputType="textEmailAddress"
-            android:hint="@string/hint.email"/>
-
-        <EditText
-            android:id="@+id/password_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:inputType="textPassword"
-            android:hint="@string/hint.password"/>
-
-        <EditText
-            android:id="@+id/password_again_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:inputType="textPassword"
-            android:hint="@string/hint.confirmpassword"/>
-
-        <EditText
-            android:id="@+id/birthday_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:layout_marginTop="20dp"
-            android:onClick="onClickBirthday"
-            android:hint="@string/hint.birthday"/>
+            android:hint="Description"
+            android:inputType="text" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:gravity="center_vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+
+            <ImageButton
+                android:id="@+id/imageButton_createEvent_sport"
+                style="@android:style/Widget.ImageButton"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="@string/textview.gender"/>
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/ic_launcher" />
 
-            <RadioGroup
-                android:id="@+id/gender_radiogroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/male"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/radio.male"/>
-
-                <RadioButton
-                    android:id="@+id/female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/radio.female"/>
-
-            </RadioGroup>
-
+            <Spinner
+                android:id="@+id/spinner_createEvent_sport"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/register_button"
+        <EditText
+            android:id="@+id/editText_createEvent_requirements"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="@string/button.register"/>
+            android:hint="Requirements"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/editText_createEvent_cost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Cost"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/editText_createEvent_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="City"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editText_createEvent_local"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Local"
+            android:inputType="none|textPassword" />
+
+        <EditText
+            android:id="@+id/editText_createEvent_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:layout_marginTop="20dp"
+            android:hint="Date"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editText_createEvent_startTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:layout_marginTop="20dp"
+            android:hint="Start Time"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editText_createEvent_duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Duration"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editText_createEvent_finishTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Finish Time"
+            android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/back_button"
+            android:id="@+id/button_createEvent_createEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="@string/button.back"/>
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Create Event" />
+
+        <Button
+            android:id="@+id/button_createEvent_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Back" />
 
     </LinearLayout>
 

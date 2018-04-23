@@ -23,6 +23,8 @@ public class FinishEventCreationActivity extends AppCompatActivity {
 
     String eventName;
     String eventDescription;
+    String eventRequirements;
+    String eventCost;
     String sportSelected;
     int minPlayers;
     int maxPlayers;
@@ -30,6 +32,7 @@ public class FinishEventCreationActivity extends AppCompatActivity {
     String eventCity;
     Date eventDate;
     Timestamp startTime;
+    String duration;
     Timestamp finishTime;
 
     @Override
@@ -42,6 +45,10 @@ public class FinishEventCreationActivity extends AppCompatActivity {
         tv = findViewById(R.id.textView_description);
         tv.setText(getIntent().getStringExtra("eventDescription"));
         tv = findViewById(R.id.textView_sport);
+        tv.setText(getIntent().getStringExtra("eventRequirements"));
+        tv = findViewById(R.id.textView_requirements);
+        tv.setText(getIntent().getStringExtra("eventCost"));
+        tv = findViewById(R.id.textView_cost);
         tv.setText(getIntent().getStringExtra("sportSelected"));
         tv = findViewById(R.id.textView_minPlayers);
         tv.setText(getIntent().getStringExtra("minPlayers"));
@@ -69,11 +76,15 @@ public class FinishEventCreationActivity extends AppCompatActivity {
     public void onClickConfirmar(View view){
         eventName = getIntent().getStringExtra("eventName");
         eventDescription = getIntent().getStringExtra("eventDescription");
+        eventRequirements = getIntent().getStringExtra("eventRequirements");
+        eventCost = getIntent().getStringExtra("eventCost");
         sportSelected = getIntent().getStringExtra("sportSelected");
         minPlayers = Integer.parseInt(getIntent().getStringExtra("minPlayers"));
         maxPlayers = Integer.parseInt(getIntent().getStringExtra("maxPlayers"));
         eventLocal = getIntent().getStringExtra("eventLocal");
         eventCity = getIntent().getStringExtra("eventCity");
+
+        duration = getIntent().getStringExtra("eventDuration");
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
@@ -117,11 +128,14 @@ public class FinishEventCreationActivity extends AppCompatActivity {
         Event ev = new Event();
         ev.setName(eventName);
         ev.setDescription("Descrição");
+        ev.setRequirements(eventRequirements);
+        ev.setInvestiments(eventCost);
         ev.setMinPlayers(ac.getMinPlayers());
         ev.setMaxPlayers(ac.getMaxPlayers());
         ev.setStatus("Programado");
         ev.setLocal(lc);
         ev.setActivity(ac);
+        //ev.setDuration(duration);
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm");
         try {
