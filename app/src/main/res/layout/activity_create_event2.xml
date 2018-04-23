@@ -23,7 +23,7 @@
             android:layout_height="150dp"
             android:layout_marginTop="20dp"
             android:hint="Description"
-            android:inputType="text" />
+            android:inputType="textMultiLine" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,14 +32,12 @@
             android:orientation="horizontal">
 
 
-            <ImageButton
-                android:id="@+id/imageButton_createEvent_sport"
-                style="@android:style/Widget.ImageButton"
-                android:layout_width="200dp"
+            <ImageView
+                android:id="@+id/imageView_createEvent_sport"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
-                app:srcCompat="@mipmap/ic_launcher" />
+                app:srcCompat="@mipmap/ic_launcher_round" />
 
             <Spinner
                 android:id="@+id/spinner_createEvent_sport"
@@ -48,13 +46,39 @@
                 android:layout_weight="1" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Min Players"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Max Players"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
         <EditText
             android:id="@+id/editText_createEvent_requirements"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="Requirements"
-            android:inputType="textPassword" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editText_createEvent_cost"
@@ -62,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="Cost"
-            android:inputType="textPassword" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editText_createEvent_city"
@@ -102,6 +126,7 @@
             android:id="@+id/editText_createEvent_duration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="false"
             android:layout_marginTop="20dp"
             android:hint="Duration"
             android:inputType="textPersonName" />
@@ -133,6 +158,14 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:text="Back" />
+
+        <mobi.upod.timedurationpicker.TimeDurationPicker
+            android:id="@+id/timeDurationInput"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1" />
 
     </LinearLayout>
 

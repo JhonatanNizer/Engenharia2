@@ -22,6 +22,7 @@ import com.example.nizer01.goplay.dao.UserDao;
 import com.example.nizer01.goplay.domain.Activity;
 import com.example.nizer01.goplay.domain.Role;
 import com.example.nizer01.goplay.domain.User;
+import com.example.nizer01.goplay.utility.PickerDialogFragment;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -32,6 +33,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import mobi.upod.timedurationpicker.TimeDurationPicker;
+import mobi.upod.timedurationpicker.TimeDurationPickerDialogFragment;
 
 public class CreateEventActivity2 extends AppCompatActivity implements View.OnClickListener {
 
@@ -49,6 +53,7 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
     private Button backButton;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
+    private TimeDurationPicker timeDurationPicker;
 
     List<Activity> activityList = new ArrayList<>();
     Spinner activitySpinner;
@@ -114,6 +119,7 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
     private void setListeners() {
         dateEdittext.setOnClickListener(this);
         startTimeEdittext.setOnClickListener(this);
+        durationEdittext.setOnClickListener(this);
         createEventButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
     }
@@ -126,6 +132,9 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.editText_createEvent_startTime:
                 onClickEditTextEventStartTime();
+                break;
+            case R.id.editText_createEvent_duration:
+                onClickEditTextDuration();
                 break;
             case R.id.button_createEvent_createEvent:
                 onClickButtonCreateEvent();
@@ -160,6 +169,29 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
             }
         }, mHour, mMinute, true);
         timePickerDialog.show();
+    }
+
+    private void onClickEditTextDuration(){
+
+
+        new PickerDialogFragment().show(getFragmentManager(), "Duration Picker");
+
+        /*TimeDurationPickerDialogFragment
+
+        PickerDialogFragment pdf = new PickerDialogFragment();
+        TimeDurationPicker timeDurationInput = findViewById(R.id.timeDurationInput);
+        pdf.show(getFragmentManager(), "Duration Picker");
+        pdf.onDurationSet(timeDurationInput, 000);
+        System.out.println("Duraçao: " + pdf.getDuration());*/
+
+        TimeDurationPicker timeDurationInput = findViewById(R.id.timeDurationInput);
+        timeDurationInput.setOnDurationChangeListener(new TimeDurationPicker.OnDurationChangedListener() {
+            @Override
+            public void onDurationChanged(TimeDurationPicker view, long duration) {
+                System.out.println("Duraçao: " + duration);
+            }
+        });
+
     }
 
     private void onClickButtonCreateEvent() {

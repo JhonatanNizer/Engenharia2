@@ -28,4 +28,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:12.0.1'
     //implementation 'com.android.support:recyclerview-v7:24.2.0'
     implementation 'com.android.support:recyclerview-v7:27.1.0'
+    implementation 'mobi.upod:time-duration-picker:1.1.3'
 }
