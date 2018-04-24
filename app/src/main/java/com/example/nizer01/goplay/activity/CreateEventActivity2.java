@@ -46,6 +46,8 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
     private EditText dateEdittext;
     private EditText startTimeEdittext;
     private EditText durationEdittext;
+    private EditText minPlayersEditText;
+    private EditText maxPlayersEditText;
     private EditText finishTimeEdittext;
     private EditText requirementsEditText;
     private EditText costEditText;
@@ -53,7 +55,6 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
     private Button backButton;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
-    private TimeDurationPicker timeDurationPicker;
 
     List<Activity> activityList = new ArrayList<>();
     Spinner activitySpinner;
@@ -68,18 +69,18 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         //Remover posteriormente
         Activity activity1 = new Activity();
         activity1.setName("Futebol de Salão");
-        activity1.setDescription("Esporte mais popular do mundo");
+        activity1.setDescription("Soccer");
         activity1.setMinPlayers(6);
         activity1.setMaxPlayers(10);
 
         Activity activity2 = new Activity();
-        activity2.setName("Volei de Quadra");
+        activity2.setName("Voleyball");
         activity2.setDescription("Esporte muito da hora");
         activity2.setMinPlayers(8);
         activity2.setMaxPlayers(12);
 
         Activity activity3 = new Activity();
-        activity3.setName("Basquete");
+        activity3.setName("Basketball");
         activity3.setDescription("Esporte de americano");
         activity3.setMinPlayers(4);
         activity3.setMaxPlayers(10);
@@ -102,8 +103,10 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
     }
 
     private void setWidgets() {
-        nameEditText = findViewById(R.id.edittext_register_name);
+        nameEditText = findViewById(R.id.editText_createEvent_eventName);
         descriptionEditText = findViewById(R.id.editText_createEvent_eventDescription);
+        minPlayersEditText = findViewById(R.id.editText_createEvent_minPlayers);
+        maxPlayersEditText = findViewById(R.id.editText_createEvent_maxPlayers);
         cityEditText = findViewById(R.id.editText_createEvent_city);
         localEdittext = findViewById(R.id.editText_createEvent_local);
         dateEdittext = findViewById(R.id.editText_createEvent_date);
@@ -120,6 +123,7 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         dateEdittext.setOnClickListener(this);
         startTimeEdittext.setOnClickListener(this);
         durationEdittext.setOnClickListener(this);
+        finishTimeEdittext.setOnClickListener(this);
         createEventButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
     }
@@ -131,10 +135,13 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
                 onClickEditTextEventDate();
                 break;
             case R.id.editText_createEvent_startTime:
-                onClickEditTextEventStartTime();
+                onClickEditTextStartTime();
                 break;
             case R.id.editText_createEvent_duration:
                 onClickEditTextDuration();
+                break;
+            case R.id.editText_createEvent_finishTime:
+                onClickEditTextFinishTime();
                 break;
             case R.id.button_createEvent_createEvent:
                 onClickButtonCreateEvent();
@@ -157,7 +164,7 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         datePickerDialog.show();
     }
 
-    private void onClickEditTextEventStartTime() {
+    private void onClickEditTextStartTime() {
         Calendar calendar = Calendar.getInstance();
         int mHour = calendar.get(Calendar.HOUR_OF_DAY);
         int mMinute = calendar.get(Calendar.MINUTE);
@@ -171,31 +178,41 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         timePickerDialog.show();
     }
 
-    private void onClickEditTextDuration(){
-
-
-        new PickerDialogFragment().show(getFragmentManager(), "Duration Picker");
-
-        /*TimeDurationPickerDialogFragment
-
-        PickerDialogFragment pdf = new PickerDialogFragment();
-        TimeDurationPicker timeDurationInput = findViewById(R.id.timeDurationInput);
-        pdf.show(getFragmentManager(), "Duration Picker");
-        pdf.onDurationSet(timeDurationInput, 000);
-        System.out.println("Duraçao: " + pdf.getDuration());*/
-
-        TimeDurationPicker timeDurationInput = findViewById(R.id.timeDurationInput);
-        timeDurationInput.setOnDurationChangeListener(new TimeDurationPicker.OnDurationChangedListener() {
+    private void onClickEditTextFinishTime(){
+        Calendar calendar = Calendar.getInstance();
+        int mHour = calendar.get(Calendar.HOUR_OF_DAY);
+        int mMinute = calendar.get(Calendar.MINUTE);
+        timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
-            public void onDurationChanged(TimeDurationPicker view, long duration) {
-                System.out.println("Duraçao: " + duration);
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                finishTimeEdittext.setText(hourOfDay+":"+minute);
+                timePickerDialog.dismiss();
             }
-        });
+        }, mHour, mMinute, true);
+        timePickerDialog.show();
+    }
 
+    private void onClickEditTextDuration(){
+        new PickerDialogFragment().show(getFragmentManager(), "Duration Picker");
     }
 
     private void onClickButtonCreateEvent() {
+        Intent intent = new Intent(this, FinishEventCreationActivity.class );
 
+        intent.putExtra("eventName", nameEditText.getText().toString());
+        intent.putExtra("eventDescription", descriptionEditText.getText().toString());
+        intent.putExtra("eventActivity", activitySpinner.getSelectedItem().toString());
+        intent.putExtra("eventMinPlayers", minPlayersEditText.getText().toString());
+        intent.putExtra("eventMaxPlayers", maxPlayersEditText.getText().toString());
+        intent.putExtra("eventRequirements", requirementsEditText.getText().toString());
+        intent.putExtra("eventCost", costEditText.getText().toString());
+        intent.putExtra("eventCity", cityEditText.getText().toString());
+        intent.putExtra("eventLocal", localEdittext.getText().toString());
+        intent.putExtra("eventDate", dateEdittext.getText().toString());
+        intent.putExtra("eventStartTime", startTimeEdittext.getText().toString());
+        intent.putExtra("eventFinishTime", finishTimeEdittext.getText().toString());
+
+        startActivity(intent);
     }
 
     private void onClickButtonBack(){

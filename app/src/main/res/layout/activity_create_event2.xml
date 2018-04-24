@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"
-            android:inputType="textPersonName" />
+            android:inputType="textCapSentences" />
 
         <EditText
             android:id="@+id/editText_createEvent_eventDescription"
@@ -30,7 +30,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
-
 
             <ImageView
                 android:id="@+id/imageView_createEvent_sport"
@@ -54,7 +53,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/editText_createEvent_minPlayers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -63,7 +62,7 @@
                 android:inputType="numberDecimal" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/editText_createEvent_maxPlayers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -86,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="Cost"
-            android:inputType="textPersonName" />
+            android:inputType="numberDecimal" />
 
         <EditText
             android:id="@+id/editText_createEvent_city"
@@ -94,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="City"
-            android:inputType="textPersonName" />
+            android:inputType="textCapSentences" />
 
         <EditText
             android:id="@+id/editText_createEvent_local"
@@ -102,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="Local"
-            android:inputType="none|textPassword" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editText_createEvent_date"
@@ -111,7 +110,7 @@
             android:focusable="false"
             android:layout_marginTop="20dp"
             android:hint="Date"
-            android:inputType="textPersonName" />
+            android:inputType="date" />
 
         <EditText
             android:id="@+id/editText_createEvent_startTime"
@@ -120,7 +119,7 @@
             android:focusable="false"
             android:layout_marginTop="20dp"
             android:hint="Start Time"
-            android:inputType="textPersonName" />
+            android:inputType="datetime" />
 
         <EditText
             android:id="@+id/editText_createEvent_duration"
@@ -129,15 +128,16 @@
             android:focusable="false"
             android:layout_marginTop="20dp"
             android:hint="Duration"
-            android:inputType="textPersonName" />
+            android:inputType="datetime" />
 
         <EditText
             android:id="@+id/editText_createEvent_finishTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:focusable="false"
             android:hint="Finish Time"
-            android:inputType="textPersonName" />
+            android:inputType="datetime" />
 
         <Button
             android:id="@+id/button_createEvent_createEvent"
@@ -158,14 +158,6 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:text="Back" />
-
-        <mobi.upod.timedurationpicker.TimeDurationPicker
-            android:id="@+id/timeDurationInput"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1" />
 
     </LinearLayout>
 
