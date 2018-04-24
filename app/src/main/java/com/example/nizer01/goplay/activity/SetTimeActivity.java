@@ -40,12 +40,20 @@ public class SetTimeActivity extends AppCompatActivity {
                 if(who==0) {
                     startHour = hourOfDay;
                     startMin = minute;
-                    edittext1.setText(new StringBuilder().append(startHour).append(" : ").append(startMin).append(" ").append(format));
+                    edittext1.setText(
+                            String.format("%02d", Integer.parseInt(String.valueOf(startHour))) + ':' +
+                            String.format("%02d", Integer.parseInt(String.valueOf(startMin)))
+                    );
+//                    edittext1.setText(new StringBuilder().append(startHour).append(" : ").append(startMin).append(" ").append(format));
                 }
                 if(who==1) {
                     finishHour = hourOfDay;
                     finishMin = minute;
-                    edittext2.setText(new StringBuilder().append(finishHour).append(" : ").append(finishMin).append(" ").append(format));
+                    edittext2.setText(
+                            String.format("%02d", Integer.parseInt(String.valueOf(finishHour))) + ':' +
+                            String.format("%02d", Integer.parseInt(String.valueOf(finishMin)))
+                    );
+//                    edittext2.setText(new StringBuilder().append(finishHour).append(" : ").append(finishMin).append(" ").append(format));
                 }
             }
         });

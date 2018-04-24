@@ -60,17 +60,17 @@ public class FinishEventCreationActivity extends AppCompatActivity {
         tv.setText(getIntent().getStringExtra("eventCity"));
         tv = findViewById(R.id.textView_date);
         tv.setText(
-                getIntent().getStringExtra("day") + '/' +
-                getIntent().getStringExtra("month") + '/' +
-                getIntent().getStringExtra("year"));
+                String.format("%02d", Integer.parseInt(getIntent().getStringExtra("day").toString())) + '/' +
+                String.format("%02d", Integer.parseInt(getIntent().getStringExtra("month").toString())) + '/' +
+                String.format("%02d", Integer.parseInt(getIntent().getStringExtra("year").toString())));
         tv = findViewById(R.id.textView_startTime);
         tv.setText(
-                getIntent().getStringExtra("startHour") + ':' +
-                getIntent().getStringExtra("startMin"));
+                String.format("%02d", Integer.parseInt(getIntent().getStringExtra("startHour").toString())) + ':' +
+                String.format("%02d", Integer.parseInt(getIntent().getStringExtra("startMin").toString())));
         tv = findViewById(R.id.textView_finishTime);
         tv.setText(
-                getIntent().getStringExtra("finishHour") + ':' +
-                getIntent().getStringExtra("finishMin"));
+                String.format("%02d", Integer.parseInt(getIntent().getStringExtra("finishHour").toString())) + ':' +
+                String.format("%02d", Integer.parseInt(getIntent().getStringExtra("finishMin").toString())));
     }
 
     public void onClickConfirmar(View view){
