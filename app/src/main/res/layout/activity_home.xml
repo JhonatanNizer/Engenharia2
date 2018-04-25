@@ -41,7 +41,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/toolbarBottom"
         app:layout_constraintEnd_toStartOf="@+id/imageButton2"
         app:layout_constraintStart_toEndOf="@+id/imageButton4"
-        app:srcCompat="@drawable/ic_map_marker_radius" />
+        app:srcCompat="@drawable/ic_map_marker_radius"
+        android:onClick="onClickMap" />
 
     <ImageButton
         android:id="@+id/imageButton3"

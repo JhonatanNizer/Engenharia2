@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.nizer01.goplay.R;
+import com.google.android.gms.maps.MapView;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -13,6 +14,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
     }
 
     public void onClickCreateEvent(View view){
@@ -27,6 +29,11 @@ public class HomeActivity extends AppCompatActivity {
 
     public void onClickListEvents(View view){
         Intent intent = new Intent(this, ListEventsActivity.class );
+        startActivity(intent);
+    }
+
+    public void onClickMap(View view){
+        Intent intent = new Intent(this, MapsActivity.class );
         startActivity(intent);
     }
 

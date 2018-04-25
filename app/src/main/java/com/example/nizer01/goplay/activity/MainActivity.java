@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickLogin(View view){
 
-        ArrayList<User> userList = UserDao.getUserList();
+        /*ArrayList<User> userList = UserDao.getUserList();
         String email = emailEdittext.getText().toString();
         String password = passwordEdittext.getText().toString();
         if(userList.isEmpty()){
@@ -59,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        Toast.makeText(this, "Email not found", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Email not found", Toast.LENGTH_SHORT).show();*/
 
-        //Intent intent = new Intent(this, HomeActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 
     public void onClickRegister(View view){
