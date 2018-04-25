@@ -8,6 +8,9 @@ import android.widget.TextView;
 import com.example.nizer01.goplay.R;
 import com.example.nizer01.goplay.domain.Event;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class EventHolder extends RecyclerView.ViewHolder {
 
     private TextView tvName;
@@ -28,8 +31,14 @@ public class EventHolder extends RecyclerView.ViewHolder {
     public void setParameters(Event ev){
         tvName.setText(ev.getName());
         tvCity.setText(ev.getLocal().getCity());
-        tvDate.setText(String.valueOf(ev.getStartTime()));
-        tvTime.setText(String.valueOf(ev.getStartTime()));
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+        String date  = dateFormat.format(ev.getStartTime());
+        tvDate.setText(date);
+
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("hh:mm");
+        String time  = dateFormat2.format(ev.getStartTime());
+        tvTime.setText(time);
     }
 
 }

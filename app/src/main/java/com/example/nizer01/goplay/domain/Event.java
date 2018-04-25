@@ -18,6 +18,7 @@ public class Event {
     private int minPlayers;
     private Activity activity;
     private Local local;
+
     private ArrayList<User> users;
 
     public String getName() {

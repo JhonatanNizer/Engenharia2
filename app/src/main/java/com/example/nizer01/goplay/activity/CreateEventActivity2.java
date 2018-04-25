@@ -68,7 +68,7 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
 
         //Remover posteriormente
         Activity activity1 = new Activity();
-        activity1.setName("Futebol de Salão");
+        activity1.setName("Soccer");
         activity1.setDescription("Soccer");
         activity1.setMinPlayers(6);
         activity1.setMaxPlayers(10);
@@ -90,7 +90,7 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         activityList.add(activity3);
 
         List<String> spinnerArray =  new ArrayList<String>();
-        spinnerArray.add("Selecionar Atividade");
+        spinnerArray.add("Select Activity");
         spinnerArray.add(activity1.getName());
         spinnerArray.add(activity2.getName());
         spinnerArray.add(activity3.getName());
@@ -157,7 +157,10 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                dateEdittext.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+                //dateEdittext.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+                dateEdittext.setText(String.format("%02d", Integer.parseInt(String.valueOf(dayOfMonth))) + '/' +
+                        String.format("%02d", Integer.parseInt(String.valueOf(monthOfYear+1))) + '/' +
+                        String.format("%02d", Integer.parseInt(String.valueOf(year))));
                 datePickerDialog.dismiss();
             }
         },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
@@ -171,7 +174,9 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                startTimeEdittext.setText(hourOfDay+":"+minute);
+                //startTimeEdittext.setText(hourOfDay+":"+minute);
+                startTimeEdittext.setText(String.format("%02d", Integer.parseInt(String.valueOf(hourOfDay))) + ":" +
+                        String.format("%02d", Integer.parseInt(String.valueOf(minute))));
                 timePickerDialog.dismiss();
             }
         }, mHour, mMinute, true);
@@ -185,7 +190,8 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                finishTimeEdittext.setText(hourOfDay+":"+minute);
+                finishTimeEdittext.setText(String.format("%02d", Integer.parseInt(String.valueOf(hourOfDay))) + ":" +
+                        String.format("%02d", Integer.parseInt(String.valueOf(minute))));
                 timePickerDialog.dismiss();
             }
         }, mHour, mMinute, true);
@@ -197,23 +203,39 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
     }
 
     private void onClickButtonCreateEvent() {
-        Intent intent = new Intent(this, FinishEventCreationActivity.class );
 
-        intent.putExtra("eventName", nameEditText.getText().toString());
-        intent.putExtra("eventDescription", descriptionEditText.getText().toString());
-        intent.putExtra("eventActivity", activitySpinner.getSelectedItem().toString());
-        intent.putExtra("eventMinPlayers", minPlayersEditText.getText().toString());
-        intent.putExtra("eventMaxPlayers", maxPlayersEditText.getText().toString());
-        intent.putExtra("eventRequirements", requirementsEditText.getText().toString());
-        intent.putExtra("eventCost", costEditText.getText().toString());
-        intent.putExtra("eventCity", cityEditText.getText().toString());
-        intent.putExtra("eventLocal", localEdittext.getText().toString());
-        intent.putExtra("eventDate", dateEdittext.getText().toString());
-        intent.putExtra("eventStartTime", startTimeEdittext.getText().toString());
-        intent.putExtra("eventFinishTime", finishTimeEdittext.getText().toString());
-
-        startActivity(intent);
+        if((nameEditText.getText().toString().equals("") ||
+                descriptionEditText.getText().toString().equals("") ||
+                activitySpinner.getSelectedItem().toString().equals("Select Activity") ||
+                minPlayersEditText.getText().toString().equals("") ||
+                maxPlayersEditText.getText().toString().equals("") ||
+                requirementsEditText.getText().toString().equals("") ||
+                costEditText.getText().toString().equals("") ||
+                localEdittext.getText().toString().equals("") ||
+                dateEdittext.getText().toString().equals("") ||
+                startTimeEdittext.getText().toString().equals("") ||
+                finishTimeEdittext.getText().toString().equals("")
+        )) {
+            Toast.makeText(this, "No field can be empty", Toast.LENGTH_SHORT).show();
+        }else{
+            Intent intent = new Intent(this, FinishEventCreationActivity.class);
+            intent.putExtra("eventName", nameEditText.getText().toString());
+            intent.putExtra("eventDescription", descriptionEditText.getText().toString());
+            intent.putExtra("eventActivity", activitySpinner.getSelectedItem().toString());
+            intent.putExtra("eventMinPlayers", minPlayersEditText.getText().toString());
+            intent.putExtra("eventMaxPlayers", maxPlayersEditText.getText().toString());
+            intent.putExtra("eventRequirements", requirementsEditText.getText().toString());
+            intent.putExtra("eventCost", costEditText.getText().toString());
+            intent.putExtra("eventCity", cityEditText.getText().toString());
+            intent.putExtra("eventLocal", localEdittext.getText().toString());
+            intent.putExtra("eventDate", dateEdittext.getText().toString());
+            intent.putExtra("eventStartTime", startTimeEdittext.getText().toString());
+            intent.putExtra("eventFinishTime", finishTimeEdittext.getText().toString());
+            startActivity(intent);
+        }
     }
+
+
 
     private void onClickButtonBack(){
         finish();

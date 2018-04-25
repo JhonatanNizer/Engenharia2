@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.nizer01.goplay.R;
 import com.example.nizer01.goplay.dao.EventDao;
@@ -59,13 +60,15 @@ public class FinishEventCreationActivity extends AppCompatActivity {
         tv = findViewById(R.id.textView_city);
         tv.setText(getIntent().getStringExtra("eventCity"));
         tv = findViewById(R.id.textView_date);
+
         tv.setText(getIntent().getStringExtra("eventDate"));
         tv = findViewById(R.id.textView_startTime);
         tv.setText(getIntent().getStringExtra("eventStartTime"));
         tv = findViewById(R.id.textView_finishTime);
         tv.setText(getIntent().getStringExtra("eventFinishTime"));
 
-        /*tv.setText(
+        /*
+        tv.setText(
                 String.format("%02d", Integer.parseInt(getIntent().getStringExtra("day").toString())) + '/' +
                 String.format("%02d", Integer.parseInt(getIntent().getStringExtra("month").toString())) + '/' +
                 String.format("%02d", Integer.parseInt(getIntent().getStringExtra("year").toString())));
@@ -87,14 +90,17 @@ public class FinishEventCreationActivity extends AppCompatActivity {
         eventCost = getIntent().getStringExtra("eventCost");
         sportSelected = getIntent().getStringExtra("eventActivity");
         minPlayers = getIntent().getStringExtra("eventMinPlayers");
-        maxPlayers = getIntent().getStringExtra("eventMPlayers");
+        maxPlayers = getIntent().getStringExtra("eventMaxPlayers");
         eventLocal = getIntent().getStringExtra("eventLocal");
         eventCity = getIntent().getStringExtra("eventCity");
-        duration = getIntent().getStringExtra("eventDuration");
-
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         eventDate = getIntent().getStringExtra("eventDate");
+        startTime = getIntent().getStringExtra("eventStartTime");
+        duration = getIntent().getStringExtra("eventDuration");
+        finishTime = getIntent().getStringExtra("eventFinishTime");
 
+
+        /*DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        //eventDate = getIntent().getStringExtra("eventDate");
         dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
         try {
             Date parseStartTime = dateFormat.parse("00/00/0000 " +
@@ -110,10 +116,7 @@ public class FinishEventCreationActivity extends AppCompatActivity {
             //finishTime = new Timestamp(parseFinishTime.getTime());
         } catch (ParseException e) {
             e.printStackTrace();
-        }
-
-        System.out.println(startTime);
-        System.out.println(finishTime);
+        }*/
 
         //-----------------Criação do Objeto Evento---------------
         Local lc = new Local();
@@ -131,7 +134,7 @@ public class FinishEventCreationActivity extends AppCompatActivity {
 
         Event ev = new Event();
         ev.setName(eventName);
-        ev.setDescription("Descrição");
+        ev.setDescription(eventDescription);
         ev.setRequirements(eventRequirements);
         ev.setInvestiments(eventCost);
         ev.setMinPlayers(ac.getMinPlayers());
@@ -143,16 +146,17 @@ public class FinishEventCreationActivity extends AppCompatActivity {
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm");
         try {
-            Date date = df.parse("17/04/2018 16:05");
+            Date date = df.parse(eventDate + " " + startTime);
             long time = date.getTime();
             ev.setStartTime(new Timestamp(time));
-            ev.setEndTime(new Timestamp(time));
+            //ev.setEndTime(new Timestamp(time));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        //EventDao.createEvent(ev);
-        //Intent intent = new Intent(this, HomeActivity.class);
-        //startActivity(intent);
+        EventDao.createEvent(ev);
+        Toast.makeText(this, "Event Created !", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 
     public void onClickCancelar(View view) {
