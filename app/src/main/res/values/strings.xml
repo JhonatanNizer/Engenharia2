@@ -29,5 +29,6 @@
     <string name="toast.passwordsdifferent">Passwords are not the same</string>
     <string name="toast.registercompleted"> Register completed!</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps_current_place">Map</string>
 
 </resources>

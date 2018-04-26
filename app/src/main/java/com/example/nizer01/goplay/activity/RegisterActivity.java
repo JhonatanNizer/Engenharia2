@@ -138,10 +138,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         else{
             user.setGender('F');
         }
+
         Role role = new Role();
         role.setName("Normal user");
         role.setDescription("Can create and participate of events");
+
         UserDao.saveUser(user);
+
     }
 
 }
