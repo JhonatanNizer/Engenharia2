@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "275180857383",
+    "firebase_url": "https://goplay-38b4c.firebaseio.com",
+    "project_id": "goplay-38b4c",
+    "storage_bucket": "goplay-38b4c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275180857383:android:03049652b4bf17d3",
+        "android_client_info": {
+          "package_name": "com.example.nizer01"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275180857383-ukn7vrqre9heovbnsdklmk9nm47iua6d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmXiVqIdRCffS36DOgx5gLLarutPphqiE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275180857383:android:0c22223a29b2fe80",
+        "android_client_info": {
+          "package_name": "com.example.nizer01.goplay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275180857383-c7lak4flcq3ehro902rk7bq5b6oq4k2h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nizer01.goplay",
+            "certificate_hash": "5de7f8b18d2632d5b893de99e09895a50503403b"
+          }
+        },
+        {
+          "client_id": "275180857383-ukn7vrqre9heovbnsdklmk9nm47iua6d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmXiVqIdRCffS36DOgx5gLLarutPphqiE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275180857383-ukn7vrqre9heovbnsdklmk9nm47iua6d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
