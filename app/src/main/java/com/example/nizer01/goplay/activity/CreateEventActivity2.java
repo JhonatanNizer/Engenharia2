@@ -10,32 +10,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.nizer01.goplay.R;
-import com.example.nizer01.goplay.activity.MainActivity;
-import com.example.nizer01.goplay.dao.UserDao;
 import com.example.nizer01.goplay.domain.Activity;
-import com.example.nizer01.goplay.domain.Role;
-import com.example.nizer01.goplay.domain.User;
 import com.example.nizer01.goplay.utility.PickerDialogFragment;
 
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-
-import mobi.upod.timedurationpicker.TimeDurationPicker;
-import mobi.upod.timedurationpicker.TimeDurationPickerDialogFragment;
 
 public class CreateEventActivity2 extends AppCompatActivity implements View.OnClickListener {
 

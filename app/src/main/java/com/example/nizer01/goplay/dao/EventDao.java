@@ -20,12 +20,12 @@ public class EventDao {
     private static ArrayList<Event> eventList = new ArrayList<>();
 
     public static void createEvent(Event ev){
-        // Write a message to the database
+        //Salvando no banco FireBase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message/" );
-
         myRef.push().setValue(ev);
 
+        //Salvando em uma lista estática
         eventList.add(ev);
     }
 
