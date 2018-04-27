@@ -22,9 +22,10 @@ public class EventDao {
     public static void createEvent(Event ev){
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        DatabaseReference myRef = database.getReference("message/" );
 
-        myRef.setValue(ev);
+        myRef.push().setValue(ev);
+
         eventList.add(ev);
     }
 
