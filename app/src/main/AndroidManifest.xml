@@ -41,7 +41,6 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".activity.MapHomeActivity"
-            android:label="@string/title_activity_map_home"
             android:theme="@style/AppTheme"></activity>
     </application>
 
