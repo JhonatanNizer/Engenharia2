@@ -53,16 +53,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        System.out.println("onMapReady: Map is ready!");
         Log.d(TAG, "onMapReady: Map is ready!");
         mMap = googleMap;
         if (mLocationPermissionGranted) {
+            System.out.println("Permission Granted!");
             getDeviceLocation();
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
             mMap.setMyLocationEnabled(true);
-            //mMap.getUiSettings().setMyLocationButtonEnabled(false);
-
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
         }
         //Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(-26, -48);
@@ -79,10 +81,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     @Override
                     public void onComplete(@NonNull Task task) {
                         if(task.isSuccessful()){
+                            System.out.println("onComplete: Found location!");
                             Log.d(TAG, "onComplete: Found location!");
                             Location currentLocation = (Location) task.getResult();
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM);
                         }else{
+                            System.out.println("onComplete: Current location is null");
                             Log.d(TAG, "onComplete: Current location is null");
                             Toast.makeText(MapsActivity.this, "Unable to get current location", Toast.LENGTH_SHORT).show();
                         }
@@ -90,11 +94,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 });
             }
         }catch (SecurityException e){
+            System.out.println("getDeviceLocation: SecurityExeption: " + e.getMessage());
             Log.d(TAG, "getDeviceLocation: SecurityExeption: " + e.getMessage());
         }
     }
 
     private void moveCamera(LatLng latlng, float zoom){
+        System.out.println("moveCamera: moving the camera to: Lat: " + latlng.latitude + ", Lon: " + latlng.longitude);
         Log.d(TAG, "moveCamera: moving the camera to: Lat:" + latlng.latitude + ", Lon: " + latlng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, zoom));
     }
@@ -105,6 +111,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void getLocationPermission(){
+        System.out.println("Checking for location permissions...");
         String[] permissions = {FINE_LOCATION, COURSE_LOCATION};
         if(ContextCompat.checkSelfPermission(this.getApplicationContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
             if(ContextCompat.checkSelfPermission(this.getApplicationContext(), COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
@@ -113,7 +120,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }else{
                 ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE);
             }
+        }else{
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE);
         }
+
     }
 
     @Override

@@ -11,8 +11,7 @@ public class UserDao {
     public static void saveUser(User user){ userList.add(user); }
 
     public static User getUser(){
-        User user = new User();
-        return user;
+        return new User();
     }
 
     public static ArrayList<User> getUserList() { return userList; }
