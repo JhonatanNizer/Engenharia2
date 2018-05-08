@@ -33,4 +33,14 @@ public class EventDao {
         return eventList;
     }
 
+    public static ArrayList<Event> getFilteredEvents(String activity_name){
+        ArrayList<Event> filteredEventList = new ArrayList<>();
+        for (int i = 0; i < eventList.size(); i++) {
+            if(eventList.get(i).getActivity().getName().equals(activity_name)){
+                filteredEventList.add(eventList.get(i));
+            }
+        }
+        return filteredEventList;
+    }
+
 }

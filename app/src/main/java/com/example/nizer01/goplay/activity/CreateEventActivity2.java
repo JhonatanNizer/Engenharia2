@@ -54,12 +54,12 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         //Remover posteriormente
         Activity activity1 = new Activity();
         activity1.setName("Soccer");
-        activity1.setDescription("Soccer");
+        activity1.setDescription("Só retardado chama de soccer");
         activity1.setMinPlayers(6);
         activity1.setMaxPlayers(10);
 
         Activity activity2 = new Activity();
-        activity2.setName("Voleyball");
+        activity2.setName("Volleyball");
         activity2.setDescription("Esporte muito da hora");
         activity2.setMinPlayers(8);
         activity2.setMaxPlayers(12);

@@ -123,7 +123,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }else{
             ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE);
         }
-
     }
 
     @Override

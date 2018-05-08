@@ -17,6 +17,7 @@ public class EventHolder extends RecyclerView.ViewHolder {
     private TextView tvCity;
     private TextView tvDate;
     private TextView tvTime;
+    private TextView tvActivity;
     private ImageView ivIcon;
 
     public EventHolder(View itemView) {
@@ -25,12 +26,14 @@ public class EventHolder extends RecyclerView.ViewHolder {
         tvCity = itemView.findViewById(R.id.tvCidade);
         tvDate = itemView.findViewById(R.id.tvDate);
         tvTime = itemView.findViewById(R.id.tvTime);
+        tvActivity = itemView.findViewById(R.id.tvActivity);
         ivIcon = itemView.findViewById(R.id.ivPic);
     }
 
     public void setParameters(Event ev){
         tvName.setText(ev.getName());
         tvCity.setText(ev.getLocal().getCity());
+        tvActivity.setText(ev.getActivity().getName());
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
         String date  = dateFormat.format(ev.getStartTime());
