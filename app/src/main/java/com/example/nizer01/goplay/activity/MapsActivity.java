@@ -3,6 +3,8 @@ package com.example.nizer01.goplay.activity;
 import android.Manifest;
 import android.app.admin.SystemUpdatePolicy;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -10,6 +12,10 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -26,6 +32,10 @@ import com.example.nizer01.goplay.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private static final String TAG = "MapsActivity";
@@ -35,6 +45,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final int REQUEST_CODE = 1603;
     private static final float DEFAULT_ZOOM = 14f;
 
+    private EditText mSeatchText;
+
     private GoogleMap mMap;
     private boolean mLocationPermissionGranted = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -43,21 +55,54 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_map_home);
+        setContentView(R.layout.activity_maps);
+        mSeatchText = (EditText) findViewById(R.id.input_search);
+
+        /*
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        */
         getLocationPermission();
+    }
+
+    private void init(){
+        mSeatchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH
+                        || actionId == EditorInfo.IME_ACTION_DONE
+                        || event.getAction() == event.ACTION_DOWN
+                        || event.getAction() == event.KEYCODE_ENTER){
+                    geolocate();
+                }
+                return false;
+            }
+        });
+    }
+
+    private void geolocate(){
+        String searchString = mSeatchText.getText().toString();
+        Geocoder geocoder = new Geocoder(MapsActivity.this);
+        List<Address> list = new ArrayList<>();
+        try{
+            list = geocoder.getFromLocationName(searchString, 1);
+        }catch(IOException e){
+            System.out.println(e);
+        }
+
+        if(list.size() > 0){
+            Address address = list.get(0);
+            System.out.println("Found location!: " + address.toString());
+        }
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        System.out.println("onMapReady: Map is ready!");
         Log.d(TAG, "onMapReady: Map is ready!");
         mMap = googleMap;
         if (mLocationPermissionGranted) {
-            System.out.println("Permission Granted!");
             getDeviceLocation();
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -65,11 +110,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
+            init();
         }
         //Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(-26, -48);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //univali: lat -26.91621 long -48.6641
     }
 
     private void getDeviceLocation(){
