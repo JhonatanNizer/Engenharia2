@@ -1,6 +1,5 @@
 package com.example.nizer01.goplay.domain;
 
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 

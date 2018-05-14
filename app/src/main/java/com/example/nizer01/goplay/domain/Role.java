@@ -1,9 +1,5 @@
 package com.example.nizer01.goplay.domain;
 
-/**
- * Created by jhonatan.nizer on 06/04/2018.
- */
-
 public class Role {
 
     private String name;

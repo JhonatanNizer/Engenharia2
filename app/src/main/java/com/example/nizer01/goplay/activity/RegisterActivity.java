@@ -26,8 +26,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * Classe responsável pela criação da atividade de registro.
+ * Essa atividade tem como objetivo criar uma GUI para o usuário se registar no sistema.
+ * Após o registro os dados serão salvos no banco de dados.
+ */
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /**
+     * Declaração das variáveis que serão inicializados pelo método setWidgets.
+     */
     private EditText firstnameEdittext;
     private EditText lastnameEdittext;
     private EditText emailEdittext;
@@ -39,6 +48,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button backButton;
     private DatePickerDialog datePickerDialog;
 
+    /**
+     * Método onCreate é inicializado automaticamente ao iniciar a atividade.
+     * @param savedInstanceState Parametro obrigatório para a criação da atividade
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +60,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setListeners();
     }
 
+    /**
+     * Método responsável por relacionar os objetos gráficos do layout com os objetos
+     * desta classe declarados na inicialização.
+     * É chamado apenas uma vez dentro do método onCreate.
+     */
     private void setWidgets() {
         firstnameEdittext=(EditText)findViewById(R.id.edittext_register_name);
         lastnameEdittext=(EditText)findViewById(R.id.edittext_register_lastname);
@@ -59,12 +77,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         backButton=(Button)findViewById(R.id.button_register_back);
     }
 
+    /**
+     * Método responsável por criar e relacionar os listeners utilizados nessa atividade
+     * com seus respectivos botoes.
+     * É chamado apenas uma vez dentro do método onCreate.
+     */
     private void setListeners() {
         birthdayEdittext.setOnClickListener(this);
         registerButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
     }
 
+    /**
+     *
+     * @param v Recebe a View que está sendo executada no momento.
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){
