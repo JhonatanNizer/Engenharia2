@@ -85,7 +85,8 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         activitySpinner.setAdapter(adapter);
         //Remover posteriormente
 
-        if(!(getIntent().getStringExtra("Local")).isEmpty()){
+        if((getIntent().getStringExtra("Local")) != "FromHome"){
+            cityEditText.setText((getIntent().getStringExtra("City")));
             localEdittext.setText((getIntent().getStringExtra("Local")));
         }
 

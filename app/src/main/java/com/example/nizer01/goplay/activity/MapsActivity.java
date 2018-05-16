@@ -221,6 +221,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //System.out.println(address.getAddressLine(0));
         Intent intent = new Intent(this, CreateEventActivity2.class);
         String addressExtra = address.getAddressLine(0).toString();
+        String cityExtra = address.getSubAdminArea();
+        intent.putExtra("City", cityExtra);
         intent.putExtra("Local", addressExtra);
         startActivity(intent);
         finish();

@@ -27,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void onClickCreateEvent(View view){
         Intent intent = new Intent(this, CreateEventActivity2.class );
+        intent.putExtra("FromHome", "FromHome");
         startActivity(intent);
     }
 
