@@ -1,4 +1,6 @@
-package com.example.nizer01.goplay.utility;import com.google.android.gms.common.api.GoogleApiClient;
+package com.example.nizer01.goplay.utility;
+
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.common.data.DataBufferUtils;
@@ -204,8 +206,8 @@ public class PlaceAutoCompleteAdapter
             // Confirm that the query completed successfully, otherwise return null
             final Status status = autocompletePredictions.getStatus();
             if (!status.isSuccess()) {
-              //  Toast.makeText(getContext(), "Error contacting API: " + status.toString(),
-                        //Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(getContext(), "Error contacting API: " + status.toString(),
+                //Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "Error getting autocomplete prediction API call: " + status.toString());
                 autocompletePredictions.release();
                 return null;

@@ -74,18 +74,18 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         activityList.add(activity2);
         activityList.add(activity3);
 
-        List<String> spinnerArray =  new ArrayList<String>();
+        List<String> spinnerArray = new ArrayList<String>();
         spinnerArray.add("Select Activity");
         spinnerArray.add(activity1.getName());
         spinnerArray.add(activity2.getName());
         spinnerArray.add(activity3.getName());
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray );
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         activitySpinner = (Spinner) findViewById(R.id.spinner_createEvent_sport);
         activitySpinner.setAdapter(adapter);
         //Remover posteriormente
 
-        if((getIntent().getStringExtra("Local")) != "FromHome"){
+        if ((getIntent().getStringExtra("Local")) != "FromHome") {
             cityEditText.setText((getIntent().getStringExtra("City")));
             localEdittext.setText((getIntent().getStringExtra("Local")));
         }
@@ -120,7 +120,7 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.editText_createEvent_date:
                 onClickEditTextEventDate();
                 break;
@@ -149,11 +149,11 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 //dateEdittext.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
                 dateEdittext.setText(String.format("%02d", Integer.parseInt(String.valueOf(dayOfMonth))) + '/' +
-                        String.format("%02d", Integer.parseInt(String.valueOf(monthOfYear+1))) + '/' +
+                        String.format("%02d", Integer.parseInt(String.valueOf(monthOfYear + 1))) + '/' +
                         String.format("%02d", Integer.parseInt(String.valueOf(year))));
                 datePickerDialog.dismiss();
             }
-        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
     }
 
@@ -173,7 +173,7 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         timePickerDialog.show();
     }
 
-    private void onClickEditTextFinishTime(){
+    private void onClickEditTextFinishTime() {
         Calendar calendar = Calendar.getInstance();
         int mHour = calendar.get(Calendar.HOUR_OF_DAY);
         int mMinute = calendar.get(Calendar.MINUTE);
@@ -188,13 +188,13 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
         timePickerDialog.show();
     }
 
-    private void onClickEditTextDuration(){
+    private void onClickEditTextDuration() {
         new PickerDialogFragment().show(getFragmentManager(), "Duration Picker");
     }
 
     private void onClickButtonCreateEvent() {
 
-        if((nameEditText.getText().toString().equals("") ||
+        if ((nameEditText.getText().toString().equals("") ||
                 descriptionEditText.getText().toString().equals("") ||
                 activitySpinner.getSelectedItem().toString().equals("Select Activity") ||
                 minPlayersEditText.getText().toString().equals("") ||
@@ -207,7 +207,7 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
                 finishTimeEdittext.getText().toString().equals("")
         )) {
             Toast.makeText(this, "No field can be empty", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             Intent intent = new Intent(this, FinishEventCreationActivity.class);
             intent.putExtra("eventName", nameEditText.getText().toString());
             intent.putExtra("eventDescription", descriptionEditText.getText().toString());
@@ -226,8 +226,7 @@ public class CreateEventActivity2 extends AppCompatActivity implements View.OnCl
     }
 
 
-
-    private void onClickButtonBack(){
+    private void onClickButtonBack() {
         finish();
     }
 

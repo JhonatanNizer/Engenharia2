@@ -25,41 +25,41 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void onClickCreateEvent(View view){
-        Intent intent = new Intent(this, CreateEventActivity2.class );
+    public void onClickCreateEvent(View view) {
+        Intent intent = new Intent(this, CreateEventActivity2.class);
         intent.putExtra("FromHome", "FromHome");
         startActivity(intent);
     }
 
-    public void onClickListEvents(View view){
-        Intent intent = new Intent(this, ListEventsActivity.class );
+    public void onClickListEvents(View view) {
+        Intent intent = new Intent(this, ListEventsActivity.class);
         startActivity(intent);
     }
 
-    public void onClickMap(View view){
-        if(isServiesOk()) {
+    public void onClickMap(View view) {
+        if (isServiesOk()) {
             Intent intent = new Intent(this, MapsActivity.class);
             startActivity(intent);
         }
     }
 
-    public void onClickMapHome(View view){
-        Intent intent = new Intent(this, MapHomeActivity.class );
+    public void onClickMapHome(View view) {
+        Intent intent = new Intent(this, MapHomeActivity.class);
         startActivity(intent);
     }
 
-    public boolean isServiesOk(){
+    public boolean isServiesOk() {
         Log.d(TAG, "isServicesOk: checking google sercies version");
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this);
 
-        if(available == ConnectionResult.SUCCESS){
+        if (available == ConnectionResult.SUCCESS) {
             Log.d(TAG, "isServiesOk: Google Play Services is working");
             return true;
-        }else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+        } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)) {
             Log.d(TAG, "isServicesOk: Google Play Services is NOT working ");
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(this, available, ERROR_DIALOG_REQUEST);
             dialog.show();
-        }else{
+        } else {
             Toast.makeText(this, "Map request refused", Toast.LENGTH_SHORT).show();
         }
         return false;

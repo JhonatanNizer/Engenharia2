@@ -35,13 +35,13 @@ public class ListEventsActivity extends AppCompatActivity {
         rvList.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void updateList(String filter){
+    public void updateList(String filter) {
         adapter = new EventAdapter(EventDao.getFilteredEvents(filter));
         rvList.setAdapter(adapter);
         rvList.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void onClickFilter(View view){
+    public void onClickFilter(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Filter by Activity");
         final EditText input = new EditText(this);

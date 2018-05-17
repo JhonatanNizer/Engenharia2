@@ -83,7 +83,7 @@ public class FinishEventCreationActivity extends AppCompatActivity {
         */
     }
 
-    public void onClickConfirmar(View view){
+    public void onClickConfirmar(View view) {
         eventName = getIntent().getStringExtra("eventName");
         eventDescription = getIntent().getStringExtra("eventDescription");
         eventRequirements = getIntent().getStringExtra("eventRequirements");

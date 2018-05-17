@@ -7,6 +7,17 @@
     tools:context="com.example.nizer01.goplay.activity.MainActivity">
 
     <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/sports_background_page" />
+
+    <ImageView
         android:id="@+id/imageview_main_logo"
         android:layout_width="159dp"
         android:layout_height="166dp"
@@ -58,8 +69,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginTop="8dp"
-        android:elevation="0dp"
-        android:onClick="onClickLogin"
         android:text="@string/button.login"
         android:textColor="@color/colorSecondaryDark"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,10 +80,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
         android:layout_marginTop="8dp"
-        android:onClick="onClickRegister"
         android:text="@string/button.register"
         android:textColor="@color/colorSecondaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edittext_main_password" />
+
 
 </android.support.constraint.ConstraintLayout>
