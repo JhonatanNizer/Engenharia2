@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void onClickLogin() {
+        /*
         ArrayList<User> userList = UserDao.getUserList();
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
@@ -80,7 +81,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }
-        Toast.makeText(this, "Email not found", Toast.LENGTH_SHORT).show();
+        */
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        //Toast.makeText(this, "Email not found", Toast.LENGTH_SHORT).show();
     }
 
     private void onClickRegister() {

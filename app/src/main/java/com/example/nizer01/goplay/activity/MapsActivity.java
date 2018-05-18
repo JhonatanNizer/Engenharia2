@@ -12,11 +12,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.text.style.CharacterStyle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,6 +30,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.AutocompletePrediction;
 import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -58,6 +61,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private AutoCompleteTextView mSeatchText;
 
     private GoogleMap mMap;
+    Address address;
     private boolean mLocationPermissionGranted = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private PlaceAutoCompleteAdapter placeAutoCompleteAdapter;
@@ -90,21 +94,41 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mSeatchText.setAdapter(placeAutoCompleteAdapter);
 
-        mSeatchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mSeatchText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH
-                        || actionId == EditorInfo.IME_ACTION_DONE
-                        || event.getAction() == event.ACTION_DOWN
-                        || event.getAction() == event.KEYCODE_ENTER) {
-                    geolocate();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                List<Address> list = new ArrayList<>();
+                String searchString = placeAutoCompleteAdapter.getItem(position).getFullText(null).toString();
+                Geocoder geocoder = new Geocoder(MapsActivity.this);
+                try {
+                    list = geocoder.getFromLocationName(searchString, 1);
+
+                    if (list.size() > 0) {
+                        address = list.get(0);
+                        System.out.println("Found location!: " + address.toString());
+                        moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM, address.getAddressLine(0));
+                    }  else {
+                        System.out.println("Location not found");
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                return false;
             }
         });
+
+//        mSeatchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//
+//                    geolocate();
+//
+//                return false;
+//            }
+//        });
     }
 
-    Address address;
+
 
     private void geolocate() {
         String searchString = mSeatchText.getText().toString();
@@ -219,14 +243,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void onClickCreateEvent(View v) {
-        //System.out.println(address.getAddressLine(0));
-        Intent intent = new Intent(this, CreateEventActivity2.class);
-        String addressExtra = address.getAddressLine(0).toString();
-        String cityExtra = address.getSubAdminArea();
-        intent.putExtra("City", cityExtra);
-        intent.putExtra("Local", addressExtra);
-        startActivity(intent);
-        finish();
+            Intent intent = new Intent(this, CreateEventActivity2.class);
+            String addressExtra = address.getAddressLine(0).toString();
+            String cityExtra = address.getSubAdminArea();
+            intent.putExtra("City", cityExtra);
+            intent.putExtra("Local", addressExtra);
+            startActivity(intent);
+            finish();
 
     }
 
