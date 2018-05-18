@@ -98,7 +98,6 @@ public class FinishEventCreationActivity extends AppCompatActivity {
         duration = getIntent().getStringExtra("eventDuration");
         finishTime = getIntent().getStringExtra("eventFinishTime");
 
-
         /*DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         //eventDate = getIntent().getStringExtra("eventDate");
         dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");

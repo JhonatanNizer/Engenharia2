@@ -1,6 +1,7 @@
 package com.example.nizer01.goplay.activity;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,13 +17,32 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+/**
+ * Classe onde o programa é inicializado.
+ * É responsável por exibir a tela inicial de login.
+ * Caso o usuário não esteja logado no sistema, é possível ir para a atividade de registro para
+ * se cadastrar.
+ */
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /**
+     * Tag usada para log.
+     */
+    private static final String TAG = "MainActivity";
+
+    /**
+     * Variáveis que serão inicializados pelo método setWidgets().
+     */
     private EditText etEmail;
     private EditText etPassword;
     private Button btLogin;
     private Button btRegister;
 
+    /**
+     * Método onCreate() é inicializado automaticamente ao iniciar a atividade.
+     *
+     * @param savedInstanceState Parametro obrigatório para a criação da atividade.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +51,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setListeners();
     }
 
+    /**
+     * setWidgets() responsável por relacionar os objetos gráficos do layout com os objetos
+     * desta classe declarados na inicialização.
+     * É chamado apenas uma vez dentro do método onCreate().
+     */
     private void setWidgets() {
         etEmail = (EditText) findViewById(R.id.edittext_main_email);
         etPassword = (EditText) findViewById(R.id.edittext_main_password);
@@ -38,11 +63,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btRegister = (Button) findViewById(R.id.button_main_register);
     }
 
+    /**
+     * setListeners() responsável por criar e relacionar os listeners utilizados nessa atividade
+     * com seus respectivos botoes.
+     * É chamado apenas uma vez dentro do método onCreate().
+     */
     private void setListeners() {
         btLogin.setOnClickListener(this);
         btRegister.setOnClickListener(this);
     }
 
+    /**
+     * onClick() é responsável por detectar em qual botão o listener foi chamado utilizando o id do
+     * widget como parâmetro e direcionar para o método correto que irá tratar o clique.
+     *
+     * @param v Recebe a View que está sendo executada no momento e solicita a id do widget clicado
+     *          através do método getId().
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -55,6 +92,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * onClickLogin é responsável por tratar o clique no botão "login"
+     * Ao ser chamado, é verificado se tanto o campo de e-mail quanto o campo de password
+     * estão preenchidos.
+     * Caso estejam é verificado se o password preenchido está de acordo com o email preenchido
+     * Chama o método "HomeAcitivity" se as verificações forem aprovadas, ou exibe mensagem de erro
+     * caso algo esteja errado.
+     * É chamado apenas pelo método onClick().
+     */
     private void onClickLogin() {
         /*
         ArrayList<User> userList = UserDao.getUserList();
@@ -87,6 +133,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Toast.makeText(this, "Email not found", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * onClick register é responsável por iniciar a atividade de registro caso seja chamada
+     * pelo método onClick() se o usuário clicar no botão "register"
+     */
     private void onClickRegister() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);

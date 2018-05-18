@@ -13,7 +13,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.MapView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "HomeActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
@@ -22,6 +22,11 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 
@@ -41,11 +46,6 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MapsActivity.class);
             startActivity(intent);
         }
-    }
-
-    public void onClickMapHome(View view) {
-        Intent intent = new Intent(this, MapHomeActivity.class);
-        startActivity(intent);
     }
 
     public boolean isServiesOk() {
