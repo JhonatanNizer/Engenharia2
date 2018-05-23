@@ -1,6 +1,7 @@
 package com.example.nizer01.goplay.activity;
 
 import android.app.DatePickerDialog;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,8 +15,14 @@ import android.widget.Toast;
 
 import com.example.nizer01.goplay.R;
 import com.example.nizer01.goplay.dao.UserDao;
+import com.example.nizer01.goplay.domain.Account;
 import com.example.nizer01.goplay.domain.Role;
 import com.example.nizer01.goplay.domain.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -54,6 +61,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private RadioGroup rgGender;
     private Button btRegister;
     private Button btBack;
+
+    /**
+     * Variável da autencicação via firebase.
+     */
+    private FirebaseAuth fbAuth = FirebaseAuth.getInstance();
 
     /**
      * Método onCreate() é inicializado automaticamente ao iniciar a atividade.
@@ -151,6 +163,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      * É chamado apenas pelo método onClick().
      */
     private void onClickButtonRegister() {
+
+        fbAuth.createUserWithEmailAndPassword("jhonatan.nizer@hotmail.com", "1234");
+
         String firstname = etFirstName.getText().toString();
         String lastname = etLastName.getText().toString();
         String email = etEmail.getText().toString();
@@ -168,9 +183,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 !birthday.equals("") &&
                 !gender.equals("")) {
             if (password.equals(passwordrepeat)) {
-                createUserObject(email, password, firstname, lastname, birthday, gender);
-                Toast.makeText(this, R.string.toast_registercompleted,
-                        Toast.LENGTH_LONG).show();
+                //createUserObject(email, password, firstname, lastname, birthday, gender);
+                createFirebaseUser(email, password);
                 finish();
             } else {
                 Toast.makeText(this, R.string.toast_passwordsdifferent,
@@ -188,6 +202,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      */
     private void onClickButtonBack() {
         finish();
+    }
+
+    private void createFirebaseUser(String email, final String password){
+        fbAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(RegisterActivity.this,
+                                    R.string.toast_registercompleted,
+                                    Toast.LENGTH_LONG).show();
+                             //Account account = new Account(email, password);
+                        }else{
+                            Toast.makeText(RegisterActivity.this,
+                                    task.getException().getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     /**

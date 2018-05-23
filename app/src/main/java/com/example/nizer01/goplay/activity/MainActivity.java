@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.nizer01.goplay.R;
 import com.example.nizer01.goplay.dao.UserDao;
 import com.example.nizer01.goplay.domain.User;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -39,7 +40,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btRegister;
 
     /**
-     * Método onCreate() é inicializado automaticamente ao iniciar a atividade.
+     * Variável da autencicação via firebase.
+     */
+    private FirebaseAuth fbAuth;
+
+    /**
+     * Método onStart() é inicializado automaticamente antes de criar a atividade.
+     * Ele verifica caso já haja algum usuário logado para encaminhar para a tela home do app.
+     */
+    @Override
+    protected void onStart(){
+        super.onStart();
+        if(fbAuth.getCurrentUser() != null){
+            //Ir para atividade já logada
+        }
+    }
+
+    /**
+     * Método onCreate() é inicializado automaticamente após criar a atividade.
      *
      * @param savedInstanceState Parametro obrigatório para a criação da atividade.
      */
@@ -49,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         setWidgets();
         setListeners();
+        fbAuth = FirebaseAuth.getInstance();
     }
 
     /**
@@ -128,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         */
+
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         //Toast.makeText(this, "Email not found", Toast.LENGTH_SHORT).show();
