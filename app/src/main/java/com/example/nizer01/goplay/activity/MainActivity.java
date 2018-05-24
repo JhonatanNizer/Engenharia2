@@ -2,8 +2,10 @@ package com.example.nizer01.goplay.activity;
 
 import android.content.Intent;
 import android.nfc.Tag;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +14,9 @@ import android.widget.Toast;
 import com.example.nizer01.goplay.R;
 import com.example.nizer01.goplay.dao.UserDao;
 import com.example.nizer01.goplay.domain.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.sql.SQLOutput;
@@ -52,7 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart(){
         super.onStart();
         if(fbAuth.getCurrentUser() != null){
-            //Ir para atividade já logada
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -121,36 +128,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * É chamado apenas pelo método onClick().
      */
     private void onClickLogin() {
-        /*
-        ArrayList<User> userList = UserDao.getUserList();
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
-        if (userList.isEmpty()) {
-            Toast.makeText(this, "User list is empty", Toast.LENGTH_SHORT).show();
-            return;
-        }
         if (email.matches("") || password.matches("")) {
             Toast.makeText(this, "No field can be empty", Toast.LENGTH_SHORT).show();
             return;
-        } else {
-            for (int i = 0; i < userList.size(); i++) {
-                if (email.matches(userList.get(i).getEmail())) {
-                    if (password.matches(userList.get(i).getPassword())) {
-                        Intent intent = new Intent(this, HomeActivity.class);
-                        startActivity(intent);
-                        return;
-                    } else {
-                        Toast.makeText(this, "Wrong password", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-            }
         }
-        */
-
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-        //Toast.makeText(this, "Email not found", Toast.LENGTH_SHORT).show();
+        if(isValidEmail(email)){
+            fbAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(MainActivity.this,
+                                        task.getException().getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        } else {
+            Toast.makeText(this, "Invalid E-mail", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -160,6 +162,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void onClickRegister() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * Função para verificar se email digitado pelo usuário é valido.
+     * @param string String recebida para verificação do padrão de e-mail.
+     * @return Retorna true, caso a string esteja no padrão correto de e-mail.
+     */
+    private boolean isValidEmail(CharSequence string) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(string).matches();
     }
 
 }

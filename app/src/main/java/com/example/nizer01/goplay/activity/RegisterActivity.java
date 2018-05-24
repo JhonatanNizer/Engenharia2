@@ -163,9 +163,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      * É chamado apenas pelo método onClick().
      */
     private void onClickButtonRegister() {
-
-        fbAuth.createUserWithEmailAndPassword("jhonatan.nizer@hotmail.com", "1234");
-
         String firstname = etFirstName.getText().toString();
         String lastname = etLastName.getText().toString();
         String email = etEmail.getText().toString();
@@ -183,9 +180,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 !birthday.equals("") &&
                 !gender.equals("")) {
             if (password.equals(passwordrepeat)) {
-                //createUserObject(email, password, firstname, lastname, birthday, gender);
-                createFirebaseUser(email, password);
-                finish();
+                if(isValidEmail(email)) {
+                    createAccount(email, password, firstname, lastname, birthday, gender);
+                }else{
+                    Toast.makeText(this, "Invalid E-Mail", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(this, R.string.toast_passwordsdifferent,
                         Toast.LENGTH_SHORT).show();
@@ -204,7 +203,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         finish();
     }
 
-    private void createFirebaseUser(String email, final String password){
+    private void createAccount(final String email, final String password, final String firstname,
+                            final String lastname, final String birthday, final String gender){
         fbAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -213,7 +213,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             Toast.makeText(RegisterActivity.this,
                                     R.string.toast_registercompleted,
                                     Toast.LENGTH_LONG).show();
-                             //Account account = new Account(email, password);
+                            createProfile(firstname, lastname, birthday, gender);
                         }else{
                             Toast.makeText(RegisterActivity.this,
                                     task.getException().getMessage(),
@@ -229,20 +229,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      * Sua função é criar um objeto "User" recebendo por parametro todos os dados nescessários para
      * a criação do mesmo e chamar a o método saveUser() da classe DAO para salvar no banco de dados.
      *
-     * @param email     E-mail do usuário que será usado como login.
-     * @param password  Senha do usuário.
      * @param firstname Primeiro nome do usuário.
      * @param lastname  Sobrenome do usuário.
      * @param birthday  Data de nascimento do usuário.
      * @param gender    Gênero do usuário.
      *                  Todos os parametros são apenas utilizados para serem persistidos no banco de dados.
      */
-    private void createUserObject(String email, String password,
-                                  String firstname, String lastname,
-                                  String birthday, String gender) {
+    private void createProfile(String firstname, String lastname, String birthday, String gender) {
         User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
         user.setFirstName(firstname);
         user.setLastName(lastname);
         try {
@@ -263,6 +257,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         role.setDescription("Can create and participate of events");
         user.setRole(role);
         UserDao.saveUser(user);
+        finish();
+    }
+
+    private boolean isValidEmail(CharSequence string) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(string).matches();
     }
 
 }
