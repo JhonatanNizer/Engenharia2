@@ -7,7 +7,7 @@ public class Request {
     private String message;
     private Date date;
     private int status;
-    private User user;
+    private Profile profile;
     private Event event;
 
     public String getMessage() {
@@ -34,9 +34,9 @@ public class Request {
         this.status = status;
     }
 
-    public User getUser() { return user; }
+    public Profile getProfile() { return profile; }
 
-    public void setUser(User user) { this.user = user; }
+    public void setProfile(Profile profile) { this.profile = profile; }
 
     public Event getEvent() { return event; }
 

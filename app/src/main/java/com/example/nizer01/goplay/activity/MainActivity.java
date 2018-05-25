@@ -1,27 +1,19 @@
 package com.example.nizer01.goplay.activity;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.nizer01.goplay.R;
-import com.example.nizer01.goplay.dao.UserDao;
-import com.example.nizer01.goplay.domain.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Classe onde o programa é inicializado.
@@ -47,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Variável da autencicação via firebase.
      */
-    private FirebaseAuth fbAuth;
+    private final FirebaseAuth fbAuth = FirebaseAuth.getInstance();
 
     /**
      * Método onStart() é inicializado automaticamente antes de criar a atividade.
@@ -74,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         setWidgets();
         setListeners();
-        fbAuth = FirebaseAuth.getInstance();
     }
 
     /**

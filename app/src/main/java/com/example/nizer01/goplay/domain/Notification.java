@@ -4,7 +4,7 @@ public class Notification {
 
     private String title;
     private String description;
-    private User user;
+    private Profile profile;
     private Event event;
 
     public String getTitle() {
@@ -23,9 +23,9 @@ public class Notification {
         this.description = description;
     }
 
-    public User getUser() { return user; }
+    public Profile getProfile() { return profile; }
 
-    public void setUser(User user) { this.user = user; }
+    public void setProfile(Profile profile) { this.profile = profile; }
 
     public Event getEvent() { return event; }
 

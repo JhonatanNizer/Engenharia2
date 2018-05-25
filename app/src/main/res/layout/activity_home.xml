@@ -52,6 +52,7 @@
         android:background="@color/colorSecondaryDark"
         android:clickable="true"
         android:elevation="24dp"
+        android:onClick="onClickSettings"
         android:scaleType="fitXY"
         android:src="@drawable/ic_settings"
         app:layout_constraintBottom_toBottomOf="parent"

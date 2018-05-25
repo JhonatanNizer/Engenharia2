@@ -1,15 +1,20 @@
 package com.example.nizer01.goplay.domain;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
-public class User {
+public class Profile {
 
     private String firstName;
     private String lastName;
     private Timestamp birthDate;
-    private Character gender;
-    private Role role;
+    private String gender;
+
+    public void Profile(String firstName, String lastName, Timestamp birthDate, String gender){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.gender = gender;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -35,14 +40,10 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public Character getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Character gender) { this.gender = gender; }
-
-    public Role getRole() { return role; }
-
-    public void setRole(Role role) { this.role = role; }
+    public void setGender(String gender) { this.gender = gender; }
 
 }

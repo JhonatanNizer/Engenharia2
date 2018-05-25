@@ -1,7 +1,6 @@
 package com.example.nizer01.goplay.activity;
 
 import android.app.DatePickerDialog;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,15 +13,11 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.nizer01.goplay.R;
-import com.example.nizer01.goplay.dao.UserDao;
+import com.example.nizer01.goplay.dao.AccountDao;
+import com.example.nizer01.goplay.dao.ProfileDao;
 import com.example.nizer01.goplay.domain.Account;
-import com.example.nizer01.goplay.domain.Role;
-import com.example.nizer01.goplay.domain.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.example.nizer01.goplay.domain.Profile;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -33,7 +28,7 @@ import java.util.Date;
 
 /**
  * Todo: Inserir mais logs se nescessário.
- * Todo: Verficiar se e-mail é valido.
+ * Todo: Verficiar se e-mail é valido. (FEITO)
  * Todo: Verificar se data de nascimento é valida.
  */
 
@@ -158,8 +153,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      * Caso alguma string esteja vazia, uma mensagem é disparada para o usuário.
      * Caso as strings estejam preenchidas, é verificado se os passwords são idênticos, caso não
      * sejam, uma mensagem é disparada ao usuário.
-     * Caso as duas verificações acima sejam aceitas o método createUserObject() é chamado e
-     * uma mensagem de sucesso é disparada pasa o usuário.
+     * Caso as duas verificações acima sejam aceitas o método createAccount() da classe AccountDao
+     * é chamado e uma mensagem de sucesso é disparada pasa o usuário.
      * É chamado apenas pelo método onClick().
      */
     private void onClickButtonRegister() {
@@ -180,10 +175,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 !birthday.equals("") &&
                 !gender.equals("")) {
             if (password.equals(passwordrepeat)) {
-                if(isValidEmail(email)) {
-                    createAccount(email, password, firstname, lastname, birthday, gender);
+                if(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    createAccountObject(email, password);
+                    createProfileObject(firstname, lastname, birthday, gender);
                 }else{
-                    Toast.makeText(this, "Invalid E-Mail", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Invalid e-Mail", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(this, R.string.toast_passwordsdifferent,
@@ -203,65 +199,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         finish();
     }
 
-    private void createAccount(final String email, final String password, final String firstname,
-                            final String lastname, final String birthday, final String gender){
-        fbAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(RegisterActivity.this,
-                                    R.string.toast_registercompleted,
-                                    Toast.LENGTH_LONG).show();
-                            createProfile(firstname, lastname, birthday, gender);
-                        }else{
-                            Toast.makeText(RegisterActivity.this,
-                                    task.getException().getMessage(),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+    private void createAccountObject(String email, String password){
+        Account account = new Account(email, password);
+        AccountDao.createAccount(account);
     }
 
-    /**
-     * Após todas as verificações se o usuário preencheu corretamente todos os campos de registro
-     * o método createUserObject() é chamado pelo onClickButtonRegister().
-     * Sua função é criar um objeto "User" recebendo por parametro todos os dados nescessários para
-     * a criação do mesmo e chamar a o método saveUser() da classe DAO para salvar no banco de dados.
-     *
-     * @param firstname Primeiro nome do usuário.
-     * @param lastname  Sobrenome do usuário.
-     * @param birthday  Data de nascimento do usuário.
-     * @param gender    Gênero do usuário.
-     *                  Todos os parametros são apenas utilizados para serem persistidos no banco de dados.
-     */
-    private void createProfile(String firstname, String lastname, String birthday, String gender) {
-        User user = new User();
-        user.setFirstName(firstname);
-        user.setLastName(lastname);
+    private void createProfileObject(String firstname, String lastname, String birthday, String gender) {
+        Profile profile = new Profile();
+        profile.setFirstName(firstname);
+        profile.setLastName(lastname);
         try {
             DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
             Date date = df.parse(birthday);
             long time = date.getTime();
-            user.setBirthDate(new Timestamp(time));
+            profile.setBirthDate(new Timestamp(time));
         } catch (ParseException e) {
             Log.e(TAG, "createUserObject: ", e);
         }
-        if (gender == "Male" || gender == "Masculino")
-            user.setGender('M');
-        else {
-            user.setGender('F');
-        }
-        Role role = new Role();
-        role.setName("Normal user");
-        role.setDescription("Can create and participate of events");
-        user.setRole(role);
-        UserDao.saveUser(user);
+        profile.setGender(gender);
+        ProfileDao.createProfile(profile);
         finish();
-    }
-
-    private boolean isValidEmail(CharSequence string) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(string).matches();
     }
 
 }

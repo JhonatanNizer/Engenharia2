@@ -4,7 +4,7 @@ public class Comment {
 
     private String title;
     private String description;
-    private User user;
+    private Profile profile;
 
     public String getTitle() {
         return title;
@@ -22,8 +22,8 @@ public class Comment {
         this.description = description;
     }
 
-    public User getUser() { return user; }
+    public Profile getProfile() { return profile; }
 
-    public void setUser(User user) { this.user = user; }
+    public void setUser(Profile profile) { this.profile = profile; }
 
 }

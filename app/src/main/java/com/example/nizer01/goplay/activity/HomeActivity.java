@@ -65,4 +65,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         return false;
     }
 
+    public void onClickSettings(View view){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
 }

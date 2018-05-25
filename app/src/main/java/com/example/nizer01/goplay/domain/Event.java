@@ -18,7 +18,7 @@ public class Event {
     private Activity activity;
     private Local local;
 
-    private ArrayList<User> users;
+    private ArrayList<Profile> profiles;
 
     public String getName() {
         return name;
@@ -106,8 +106,8 @@ public class Event {
 
     public String toString(){ return this.name; }
 
-    public ArrayList<User> getUsers() { return users; }
+    public ArrayList<Profile> getProfiles() { return profiles; }
 
-    public void setUsers(ArrayList<User> users) { this.users = users; }
+    public void setProfiles(ArrayList<Profile> profiles) { this.profiles = profiles; }
 
 }
