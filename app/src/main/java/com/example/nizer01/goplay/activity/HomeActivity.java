@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.nizer01.goplay.R;
+import com.example.nizer01.goplay.domain.Event;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.MapView;
@@ -48,6 +49,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void onClickEvento(View view) {
+        if (isServiesOk()) {
+            Intent intent = new Intent(this, EventActivity.class);
+            startActivity(intent);
+        }
+    }
     public boolean isServiesOk() {
         Log.d(TAG, "isServicesOk: checking google sercies version");
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this);
