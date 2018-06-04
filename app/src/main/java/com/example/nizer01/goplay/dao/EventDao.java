@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.sql.Timestamp;
@@ -17,6 +18,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 public class EventDao {
 
@@ -27,10 +29,16 @@ public class EventDao {
 
     public static void createEvent(Event ev){
         //Salvando no banco FireBase
-        databaseReference.push().setValue(ev);
+        ev.setID(UUID.randomUUID().toString());
+        databaseReference.child(ev.getID()).setValue(ev);
+        //databaseReference.push().setValue(ev);
 
         //Salvando em uma lista estática
-        eventList.add(ev);
+        //eventList.add(ev);
+    }
+
+    public static Event getEventFromList(int position){
+        return eventList.get(position);
     }
 
     public static ArrayList<Event> getEvents(){ return eventList; }
@@ -43,7 +51,7 @@ public class EventDao {
                 eventList.clear();
                 for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
                     Event ev = objSnapshot.getValue(Event.class);
-                    System.out.println(ev.getName());
+                    //System.out.println(ev.getName());
                     eventList.add(ev);
                 }
             }
@@ -53,24 +61,6 @@ public class EventDao {
 
             }
         });
-
-        /*databaseReference.child("event").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                eventList.clear();
-                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    Event ev = objSnapshot.getValue(Event.class);
-                    eventList.add(ev);
-                    System.out.println(ev.getName());
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
         return eventList;
     }
 
@@ -82,6 +72,44 @@ public class EventDao {
             }
         }
         return filteredEventList;
+    }
+
+    public static ArrayList<Event> getFirebaseFilteredEvents(String activity_name){
+        final ArrayList<Event> filteredEventList = new ArrayList<>();
+        Query query;
+
+        if(activity_name.equals("")){
+            return eventList;
+        }else {
+            query = databaseReference.child("event").orderByChild("name").startAt(activity_name);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                            Event ev = objSnapshot.getValue(Event.class);
+                            eventList.add(ev);
+                            System.out.println("Filtrado!" + ev.getName());
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+            return filteredEventList;
+        }
+    }
+
+    public static void updateEvent(Event ev){
+        databaseReference.child(ev.getID()).setValue(ev);
+    }
+
+    public static void deleteEvent(Event ev){
+        databaseReference.child(ev.getID()).removeValue();
     }
 
 }

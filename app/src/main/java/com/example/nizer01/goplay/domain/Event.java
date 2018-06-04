@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Event {
 
+    private String ID;
     private String name;
     private String description;
     private String requirements;
@@ -19,6 +20,14 @@ public class Event {
     private Local local;
 
     private ArrayList<Profile> profiles;
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
 
     public String getName() {
         return name;

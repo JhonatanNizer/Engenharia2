@@ -59,7 +59,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textView_requiremets"
+            android:id="@+id/textView_event_requiremets"
             android:layout_width="411dp"
             android:layout_height="wrap_content"
             android:paddingBottom="7dp"
@@ -70,7 +70,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textView_date"
+            android:id="@+id/textView_event_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="7dp"
@@ -82,7 +82,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView_custo"
+            android:id="@+id/textView_event_custo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="7dp"
@@ -90,7 +90,21 @@
             android:paddingTop="7dp"
             android:text="Custo: 10 pila"
             android:textColor="#ffffff"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button_event_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="atualizaDados"
+            android:text="Atualiza Dados" />
+
+        <Button
+            android:id="@+id/button_event_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="deletaEvento"
+            android:text="Deletar Evento" />
 
 
     </LinearLayout>
