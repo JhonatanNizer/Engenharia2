@@ -42,6 +42,7 @@ public class EventHolder extends RecyclerView.ViewHolder {
         SimpleDateFormat dateFormat2 = new SimpleDateFormat("hh:mm");
         String time  = dateFormat2.format(ev.getStartTime());
         tvTime.setText(time);
+
     }
 
 }

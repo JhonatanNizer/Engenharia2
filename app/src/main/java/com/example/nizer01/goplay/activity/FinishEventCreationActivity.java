@@ -147,7 +147,7 @@ public class FinishEventCreationActivity extends AppCompatActivity {
         try {
             Date date = df.parse(eventDate + " " + startTime);
             long time = date.getTime();
-            ev.setStartTime(new Timestamp(time));
+            ev.setStartTime(time);
             //ev.setEndTime(new Timestamp(time));
         } catch (ParseException e) {
             e.printStackTrace();

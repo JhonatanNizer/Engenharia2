@@ -30,7 +30,7 @@ public class ListEventsActivity extends AppCompatActivity {
         rvList = findViewById(R.id.rvList);
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
 
-        adapter = new EventAdapter(EventDao.getEvents());
+        adapter = new EventAdapter(EventDao.getFireBaseEvents());
         rvList.setAdapter(adapter);
         rvList.setLayoutManager(new LinearLayoutManager(this));
     }

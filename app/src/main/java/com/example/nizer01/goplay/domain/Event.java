@@ -9,9 +9,9 @@ public class Event {
     private String description;
     private String requirements;
     private String cost;
-    private Timestamp startTime;
-    private Timestamp duration;
-    private Timestamp endTime;
+    private Long startTime;
+    private Long duration;
+    private Long endTime;
     private String status;
     private int maxPlayers;
     private int minPlayers;
@@ -44,23 +44,23 @@ public class Event {
         this.requirements = requirements;
     }
 
-    public Timestamp getStartTime() {
+    public Long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(Long startTime) {
         this.startTime = startTime;
     }
 
-    public Timestamp getDuration() { return duration; }
+    public Long getDuration() { return duration; }
 
-    public void setDuration(Timestamp duration) { this.duration = duration; }
+    public void setDuration(Long duration) { this.duration = duration; }
 
-    public Timestamp getEndTime() {
+    public Long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(Long endTime) {
         this.endTime = endTime;
     }
 

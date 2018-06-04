@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.nizer01.goplay.R;
+import com.example.nizer01.goplay.dao.EventDao;
 import com.example.nizer01.goplay.domain.Event;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -40,6 +41,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClickListEvents(View view) {
         Intent intent = new Intent(this, ListEventsActivity.class);
         startActivity(intent);
+        EventDao.getFireBaseEvents();
     }
 
     public void onClickMap(View view) {
