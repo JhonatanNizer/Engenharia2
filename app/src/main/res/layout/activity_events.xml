@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nizer01.goplay.activity.ListEventsActivity">
+    tools:context="com.example.nizer01.goplay.activity.EventsActivity">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -31,4 +31,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/menuBottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/map"
+        android:fillViewport="true"
+        android:stateListAnimator="@null"
+        android:orientation="vertical">
+
+        <include layout="@layout/menu_primary" />
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

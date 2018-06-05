@@ -1,0 +1,99 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbarBottom"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="12dp"
+    android:background="@color/colorMenuBgPrimary"
+    android:stateListAnimator="@null"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/mn_dashboard"
+        android:layout_width="56dp"
+        android:layout_height="46dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        android:adjustViewBounds="false"
+        android:background="@color/colorMenuBgPrimary"
+        android:elevation="0dp"
+        android:scaleType="fitXY"
+        android:onClick="goHome"
+        android:src="@drawable/ic_bookmark_border"
+        android:tint="@color/colorMenuIconPrimary" />
+
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:id="@+id/mn_events"
+        android:layout_width="56dp"
+        android:layout_height="46dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        android:background="@color/colorMenuBgPrimary"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:scaleType="fitXY"
+        android:onClick="goEvents"
+        android:src="@drawable/ic_event_note"
+        android:tint="@color/colorMenuIconPrimary"/>
+
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:id="@+id/mn_maps"
+        android:layout_width="56dp"
+        android:layout_height="46dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        android:background="@color/colorMenuBgPrimary"
+        android:elevation="0dp"
+        android:scaleType="fitXY"
+        android:onClick="goMaps"
+        android:src="@drawable/ic_place"
+        android:tint="@color/colorMenuIconPrimary"/>
+
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:id="@+id/mn_notifications"
+        android:layout_width="56dp"
+        android:layout_height="46dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        android:background="@color/colorMenuBgPrimary"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_notifications"
+        android:tint="@color/colorMenuIconPrimary"/>
+
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:id="@+id/mn_account"
+        android:layout_width="56dp"
+        android:layout_height="46dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        android:background="@color/colorMenuBgPrimary"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:onClick="goAccount"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_person"
+        android:tint="@color/colorMenuIconPrimary"/>
+
+</LinearLayout>

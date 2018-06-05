@@ -3,4 +3,8 @@
     <color name="colorPrimary">#f57222</color>
     <color name="colorSecondaryDark">#23a81b</color>
     <color name="colorSecondary">#FEFEFE</color>
+
+    <color name="colorMenuIconPrimary">#FEFEFE</color>
+    <color name="colorMenuBgPrimary">#23a81b</color>
+    <color name="colorMenuBgPrimaryActive">#189011</color>
 </resources>

@@ -1,37 +1,29 @@
 package com.example.nizer01.goplay.activity;
 
 import android.Manifest;
-import android.app.admin.SystemUpdatePolicy;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.text.style.CharacterStyle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nizer01.goplay.dao.EventDao;
+import com.example.nizer01.goplay.domain.Event;
+import com.example.nizer01.goplay.domain.Local;
+import com.example.nizer01.goplay.utility.AppActivity;
 import com.example.nizer01.goplay.utility.PlaceAutoCompleteAdapter;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.AutocompletePrediction;
-import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,6 +31,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.nizer01.goplay.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,14 +41,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
+public class MapsActivity extends AppActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "MapsActivity";
 
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int REQUEST_CODE = 1603;
-    private static final float DEFAULT_ZOOM = 14f;
+    private static final float DEFAULT_ZOOM = 17f;
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40, -168), new LatLng(71, 136));
 
     private AutoCompleteTextView mSeatchText;
@@ -67,14 +60,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private PlaceAutoCompleteAdapter placeAutoCompleteAdapter;
     private GoogleApiClient mGoogleApiClient;
 
+    private EventDao database;
+
+    public MapsActivity() {
+        database = new EventDao();
+    }
+
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        if(!isUserLoggedIn()) {
+            goMain();
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        setMenuPrimaryActive(R.id.mn_maps);
+        unsetMenuPrimaryClickable(R.id.mn_maps);
+
         mSeatchText = (AutoCompleteTextView) findViewById(R.id.input_search);
 
         /*
@@ -87,6 +98,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void init() {
+
+        mMap.getUiSettings().setMapToolbarEnabled(false);
+
+        mMap.getUiSettings().setZoomControlsEnabled(false);
+
+        mMap.getUiSettings().setZoomGesturesEnabled(false);
+
+        mMap.getUiSettings().setTiltGesturesEnabled(false);
+
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+
+        mMap.setPadding(0,160,0,150);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this).addApi(Places.GEO_DATA_API).addApi(Places.PLACE_DETECTION_API).enableAutoManage(this, this).build();
 
@@ -116,16 +139,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
-
-//        mSeatchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//
-//                    geolocate();
-//
-//                return false;
-//            }
-//        });
     }
 
 
@@ -158,33 +171,60 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
+
             mMap.setMyLocationEnabled(true);
-            mMap.getUiSettings().setMyLocationButtonEnabled(true);
-            mMap.getUiSettings().setRotateGesturesEnabled(false);
+
+            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(Marker marker) {
+                    Event ev = (Event) marker.getTag();
+                    Bundle bn = new Bundle();
+                    bn.putString("id", ev.getId());
+                    goEvent(bn);
+                }
+            });
+
+            mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+                @Override
+                public void onCameraMove() {
+                for (Event ev : database.getEventsByBounds(mMap.getProjection().getVisibleRegion().latLngBounds)) {
+
+                    Local lc = ev.getLocal();
+                    MarkerOptions mo = new MarkerOptions()
+                            .position(new LatLng(lc.getLatitude(), lc.getLongitude()))
+                            .title(ev.getName())
+                            .snippet(ev.getDescription());
+
+                    Marker mk = mMap.addMarker(mo);
+
+                    mk.setTag(ev);
+                }
+                }
+            });
+
             init();
         }
-        //Add a marker in Sydney and move the camera
-        //LatLng sydney = new LatLng(-26, -48);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        //univali: lat -26.91621 long -48.6641
     }
 
     private void getDeviceLocation() {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         try {
             if (mLocationPermissionGranted) {
-                final Task location = mFusedLocationProviderClient.getLastLocation();
-                location.addOnCompleteListener(new OnCompleteListener() {
+                final Task locationResult = mFusedLocationProviderClient.getLastLocation();
+                locationResult.addOnCompleteListener(this, new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful()) {
-                            System.out.println(TAG + "onComplete: Found location!");
-                            Location currentLocation = (Location) task.getResult();
-                            moveCamera(new LatLng(-26.91621, -48.6641), DEFAULT_ZOOM, "MyLocation");
-                            //moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM);
+                            // Set the map's camera position to the current location of the device.
+                            android.location.Location mLastKnownLocation = (android.location.Location) task.getResult();
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                    new LatLng(mLastKnownLocation.getLatitude(),
+                                            mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                         } else {
-                            System.out.println(TAG + " onComplete: Current location is null");
+                            Log.d(TAG, "Current location is null. Using defaults.");
+                            Log.e(TAG, "Exception: %s", task.getException());
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-26.91621, -48.6641), DEFAULT_ZOOM));
+                            mMap.getUiSettings().setMyLocationButtonEnabled(false);
                             Toast.makeText(MapsActivity.this, "Unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -201,6 +241,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (!addressline.equals("MyLocation")) {
             mMap.addMarker(new MarkerOptions().position(latlng).title(addressline));
         }
+
+
+
+        System.out.println(mMap.getProjection().getVisibleRegion().latLngBounds.northeast);
+        System.out.println(mMap.getProjection().getVisibleRegion().latLngBounds.southwest);
+    }
+
+    public void queryMarkers(LatLngBounds bounds) {
+
     }
 
     private void initMap() {
@@ -243,14 +292,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void onClickCreateEvent(View v) {
-            Intent intent = new Intent(this, CreateEventActivity2.class);
-            String addressExtra = address.getAddressLine(0).toString();
-            String cityExtra = address.getSubAdminArea();
-            intent.putExtra("City", cityExtra);
-            intent.putExtra("Local", addressExtra);
-            startActivity(intent);
-            finish();
+        Intent intent = new Intent(this, CreateEventActivity2.class);
 
+        String citySelected = "";
+        String addressSelected = "";
+
+        if(!addressSelected.isEmpty()) {
+            addressSelected = address.getAddressLine(0);
+            citySelected = address.getSubAdminArea();
+        }
+
+        intent.putExtra("City", citySelected);
+        intent.putExtra("Local", addressSelected);
+        startActivity(intent);
+        finish();
     }
-
 }

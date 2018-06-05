@@ -3,7 +3,6 @@ package com.example.nizer01.goplay.activity;
 import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,19 +12,30 @@ import android.widget.EditText;
 
 import com.example.nizer01.goplay.R;
 import com.example.nizer01.goplay.dao.EventDao;
+import com.example.nizer01.goplay.utility.AppActivity;
 import com.example.nizer01.goplay.utility.EventAdapter;
-import com.example.nizer01.goplay.R;
 
-public class ListEventsActivity extends AppCompatActivity {
+public class EventsActivity extends AppActivity {
 
     String m_Text = "";
     EventAdapter adapter;
     RecyclerView rvList;
 
     @Override
+    protected void onStart(){
+        super.onStart();
+
+        if(!isUserLoggedIn()) {
+            goMain();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_events);
+        setContentView(R.layout.activity_events);
+        setMenuPrimaryActive(R.id.mn_events);
+        unsetMenuPrimaryClickable(R.id.mn_events);
 
         rvList = findViewById(R.id.rvList);
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);

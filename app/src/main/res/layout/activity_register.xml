@@ -15,7 +15,7 @@
                 android:id="@+id/imageview_register_logo"
                 android:layout_width="126dp"
                 android:layout_height="116dp"
-                android:src="@drawable/logo" />
+                android:src="@drawable/lg_goplay" />
 
             <EditText
                 android:id="@+id/edittext_register_name"

@@ -5,6 +5,7 @@ import android.widget.ArrayAdapter;
 import com.example.nizer01.goplay.domain.Activity;
 import com.example.nizer01.goplay.domain.Event;
 import com.example.nizer01.goplay.domain.Local;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,15 +22,13 @@ import java.util.Date;
 public class EventDao {
 
     private static ArrayList<Event> eventList = new ArrayList<>();
+    private static ArrayList<Event> filteredEventList = new ArrayList<>();
 
     private static FirebaseDatabase database  = FirebaseDatabase.getInstance();
     private static DatabaseReference databaseReference = database.getReference("event/" );
 
     public static void createEvent(Event ev){
-        //Salvando no banco FireBase
         databaseReference.push().setValue(ev);
-
-        //Salvando em uma lista estática
         eventList.add(ev);
     }
 
@@ -54,23 +53,6 @@ public class EventDao {
             }
         });
 
-        /*databaseReference.child("event").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                eventList.clear();
-                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    Event ev = objSnapshot.getValue(Event.class);
-                    eventList.add(ev);
-                    System.out.println(ev.getName());
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
         return eventList;
     }
 
@@ -81,6 +63,39 @@ public class EventDao {
                 filteredEventList.add(eventList.get(i));
             }
         }
+        return filteredEventList;
+    }
+
+
+    public static ArrayList<Event> getEventsByBounds(final LatLngBounds bounds) {
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                filteredEventList.clear();
+
+                for(DataSnapshot objSnapshot : dataSnapshot.getChildren()){
+
+                    Event ev = objSnapshot.getValue(Event.class);
+                    Local lc = ev.getLocal();
+
+                    if(  lc.getLatitude() <= bounds.northeast.latitude &&
+                         lc.getLatitude() >= bounds.southwest.latitude &&
+                         lc.getLongitude() <= bounds.northeast.longitude &&
+                         lc.getLongitude() >= bounds.southwest.longitude
+                      ) {
+                        filteredEventList.add(ev);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         return filteredEventList;
     }
 

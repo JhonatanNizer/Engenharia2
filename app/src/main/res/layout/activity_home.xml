@@ -1,169 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.nizer01.goplay.activity.HomeActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/toolbaTop"
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorSecondaryDark"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:stateListAnimator="@null">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/menuCenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:orientation="vertical"
+                android:stateListAnimator="@null">
+
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/button.listevents"
+                    android:textColor="@color/colorSecondaryDark"
+                    android:onClick="onClickListEvents" />
+
+                <TextView
+                    android:id="@+id/textView_nextEvents"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/colorSecondary"
+                    android:text="@string/textview.nextevents"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"/>
+
+                <ListView
+                    android:id="@+id/listView_closeEvents"
+                    android:layout_width="match_parent"
+                    android:layout_height="156dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#ABABAB"
+                    />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:onClick="onClickCreateEvent"
+                    android:text="Create event"
+                    android:textColor="@color/colorSecondaryDark"
+                    />
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="32dp"
+                    android:text="Button"
+                    android:onClick="onClickEvento"/>
+            </LinearLayout>
+
+        </ScrollView>
+
+
+        <LinearLayout
+            android:id="@+id/menuBottom"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/map"
+            android:fillViewport="true"
+            android:stateListAnimator="@null"
+            android:orientation="vertical">
+
+            <include layout="@layout/menu_primary" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/toolbarBottom"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorSecondaryDark"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-    </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@color/colorSecondaryDark"
-        android:elevation="24dp"
-        android:onClick="onClickMap"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_map_marker_radius"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbarBottom"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
-        app:layout_constraintStart_toEndOf="@+id/imageButton4" />
-
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/colorSecondaryDark"
-        android:clickable="true"
-        android:elevation="24dp"
-        android:onClick="onClickSettings"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_settings"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
-        android:background="@color/colorSecondaryDark"
-        android:clickable="true"
-        android:elevation="24dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_account_multiple"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton3" />
-
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:background="@color/colorSecondaryDark"
-        android:clickable="true"
-        android:elevation="24dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_magnify"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5" />
-
-    <ImageButton
-        android:id="@+id/imageButton5"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:background="@color/colorSecondaryDark"
-        android:cropToPadding="false"
-        android:elevation="24dp"
-        android:focusableInTouchMode="?android:attr/windowOverscan"
-        android:focusedByDefault="?android:attr/windowOverscan"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_home"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-    <Button
-        android:id="@+id/button_listEvents"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/button.listevents"
-        android:textColor="@color/colorSecondaryDark"
-        android:onClick="onClickListEvents"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView_closeEvents" />
-
-    <TextView
-        android:id="@+id/textView_nextEvents"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorSecondary"
-        android:text="@string/textview.nextevents"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbaTop" />
-
-    <ListView
-        android:id="@+id/listView_closeEvents"
-        android:layout_width="0dp"
-        android:layout_height="156dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="#ABABAB"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_nextEvents" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:onClick="onClickCreateEvent"
-        android:text="Create event"
-        android:textColor="@color/colorSecondaryDark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_listEvents" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="32dp"
-        android:text="Button"
-        android:onClick="onClickEvento"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
-        tools:layout_editor_absoluteX="181dp" />
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

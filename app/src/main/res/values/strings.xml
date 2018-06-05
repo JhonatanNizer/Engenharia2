@@ -18,7 +18,7 @@
     <string name="radio.male">              Male</string>
     <string name="radio.female">            Female</string>
 
-    <string name="button.register">         Register</string>
+    <string name="button.register">Register</string>
     <string name="button.back">             Back</string>
     <string name="button.cancel">           Cancel</string>
     <string name="button.login">            Login</string>
