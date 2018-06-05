@@ -3,7 +3,6 @@ package com.example.nizer01.goplay.activity;
 import android.os.Bundle;
 
 import com.example.nizer01.goplay.R;
-import com.example.nizer01.goplay.utility.AppActivity;
 
 public class HomeActivity extends AppActivity {
 
@@ -14,8 +13,8 @@ public class HomeActivity extends AppActivity {
     protected void onStart(){
         super.onStart();
 
-        if(!isUserLoggedIn()) {
-            goMain();
+        if(!user.isUserLoggedIn()) {
+            menuPrimary.goMain();
         }
     }
 
@@ -23,7 +22,7 @@ public class HomeActivity extends AppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        setMenuPrimaryActive(R.id.mn_dashboard);
-        unsetMenuPrimaryClickable(R.id.mn_dashboard);
+        menuPrimary.setMenuActive(R.id.mn_dashboard);
+        menuPrimary.unsetMenuClickable(R.id.mn_dashboard);
     }
 }

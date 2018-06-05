@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.example.nizer01.goplay.dao.EventDao;
 import com.example.nizer01.goplay.domain.Event;
 import com.example.nizer01.goplay.domain.Local;
-import com.example.nizer01.goplay.utility.AppActivity;
 import com.example.nizer01.goplay.utility.PlaceAutoCompleteAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -74,8 +73,8 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
     protected void onStart(){
         super.onStart();
 
-        if(!isUserLoggedIn()) {
-            goMain();
+        if(!user.isUserLoggedIn()) {
+            menuPrimary.goMain();
         }
     }
 
@@ -83,8 +82,8 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        setMenuPrimaryActive(R.id.mn_maps);
-        unsetMenuPrimaryClickable(R.id.mn_maps);
+        menuPrimary.setMenuActive(R.id.mn_maps);
+        menuPrimary.unsetMenuClickable(R.id.mn_maps);
 
         mSeatchText = (AutoCompleteTextView) findViewById(R.id.input_search);
 
@@ -110,6 +109,34 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
         mMap.setPadding(0,160,0,150);
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Event ev = (Event) marker.getTag();
+                Bundle bn = new Bundle();
+                bn.putString("id", ev.getId());
+                menuPrimary.goEvent(bn);
+            }
+        });
+
+        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                for (Event ev : database.getEventsByBounds(mMap.getProjection().getVisibleRegion().latLngBounds)) {
+
+                    Local lc = ev.getLocal();
+                    MarkerOptions mo = new MarkerOptions()
+                            .position(new LatLng(lc.getLatitude(), lc.getLongitude()))
+                            .title(ev.getName())
+                            .snippet(ev.getDescription());
+
+                    Marker mk = mMap.addMarker(mo);
+
+                    mk.setTag(ev);
+                }
+            }
+        });
 
         mGoogleApiClient = new GoogleApiClient.Builder(this).addApi(Places.GEO_DATA_API).addApi(Places.PLACE_DETECTION_API).enableAutoManage(this, this).build();
 
@@ -173,34 +200,6 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
             }
 
             mMap.setMyLocationEnabled(true);
-
-            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                @Override
-                public void onInfoWindowClick(Marker marker) {
-                    Event ev = (Event) marker.getTag();
-                    Bundle bn = new Bundle();
-                    bn.putString("id", ev.getId());
-                    goEvent(bn);
-                }
-            });
-
-            mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
-                @Override
-                public void onCameraMove() {
-                for (Event ev : database.getEventsByBounds(mMap.getProjection().getVisibleRegion().latLngBounds)) {
-
-                    Local lc = ev.getLocal();
-                    MarkerOptions mo = new MarkerOptions()
-                            .position(new LatLng(lc.getLatitude(), lc.getLongitude()))
-                            .title(ev.getName())
-                            .snippet(ev.getDescription());
-
-                    Marker mk = mMap.addMarker(mo);
-
-                    mk.setTag(ev);
-                }
-                }
-            });
 
             init();
         }

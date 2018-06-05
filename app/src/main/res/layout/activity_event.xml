@@ -1,111 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:fillViewport="true"
         android:orientation="vertical"
-        android:background="#166A12">
+        android:stateListAnimator="@null">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/menuCenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:orientation="vertical"
+                android:stateListAnimator="@null">
+
+                <TextView
+                    android:id="@+id/textview_event_name"
+                    android:layout_width="411dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="7dp"
+                    android:text="FUTCANELA"
+                    android:textAlignment="viewStart"
+                    android:textColor="#F57127"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_event_description"
+                    android:layout_width="411dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="7dp"
+                    android:text="Descrição do Evento: este evento pode ter uma descrição infinitamente grande, depende do criador do evento, caso ele esteja disposto a escrever uma coisa muito extensa teremos uma  descrição com várias linhas."
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView_requiremets"
+                    android:layout_width="411dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="7dp"
+                    android:text="Exigências: Chuteira sem trava."
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="7dp"
+                    android:text="Quarta-feira, 20 de Junho de 2018"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView_custo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="7dp"
+                    android:text="Custo: 10 pila"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+        </ScrollView>
 
         <LinearLayout
-            android:id="@+id/toolbarTop"
-            android:layout_width="415dp"
-            android:layout_height="52dp"
-            android:orientation="horizontal"
-            android:background="#11540E"
-            android:weightSum="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            android:id="@+id/menuBottom"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/map"
+            android:fillViewport="true"
+            android:stateListAnimator="@null"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/lg_goplay" />
+            <include layout="@layout/menu_primary" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textview_event_name"
-            android:layout_width="411dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:paddingBottom="7dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="7dp"
-            android:text="FUTCANELA"
-            android:textAlignment="viewStart"
-            android:textColor="#F57127"
-            android:textSize="40sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textview_event_description"
-            android:layout_width="411dp"
-            android:layout_height="wrap_content"
-            android:paddingBottom="7dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="7dp"
-            android:text="Descrição do Evento: este evento pode ter uma descrição infinitamente grande, depende do criador do evento, caso ele esteja disposto a escrever uma coisa muito extensa teremos uma  descrição com várias linhas."
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/textView_requiremets"
-            android:layout_width="411dp"
-            android:layout_height="wrap_content"
-            android:paddingBottom="7dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="7dp"
-            android:text="Exigências: Chuteira sem trava."
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/textView_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="7dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="7dp"
-            android:text="Quarta-feira, 20 de Junho de 2018"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView_custo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="7dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="7dp"
-            android:text="Custo: 10 pila"
-            android:textColor="#ffffff"
-            android:textSize="18sp"/>
-
-
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/menuBottom"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/map"
-        android:fillViewport="true"
-        android:stateListAnimator="@null"
-        android:orientation="vertical">
-
-        <include layout="@layout/menu_primary" />
-
-    </LinearLayout>
-
-</ScrollView>
+</RelativeLayout>

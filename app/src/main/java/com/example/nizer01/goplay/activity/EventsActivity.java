@@ -12,7 +12,6 @@ import android.widget.EditText;
 
 import com.example.nizer01.goplay.R;
 import com.example.nizer01.goplay.dao.EventDao;
-import com.example.nizer01.goplay.utility.AppActivity;
 import com.example.nizer01.goplay.utility.EventAdapter;
 
 public class EventsActivity extends AppActivity {
@@ -25,8 +24,8 @@ public class EventsActivity extends AppActivity {
     protected void onStart(){
         super.onStart();
 
-        if(!isUserLoggedIn()) {
-            goMain();
+        if(!user.isUserLoggedIn()) {
+            menuPrimary.goMain();
         }
     }
 
@@ -34,8 +33,8 @@ public class EventsActivity extends AppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
-        setMenuPrimaryActive(R.id.mn_events);
-        unsetMenuPrimaryClickable(R.id.mn_events);
+        menuPrimary.setMenuActive(R.id.mn_events);
+        menuPrimary.unsetMenuClickable(R.id.mn_events);
 
         rvList = findViewById(R.id.rvList);
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);

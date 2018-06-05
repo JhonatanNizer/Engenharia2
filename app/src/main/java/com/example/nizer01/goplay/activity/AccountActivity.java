@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.nizer01.goplay.R;
-import com.example.nizer01.goplay.utility.AppActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AccountActivity extends AppActivity {
@@ -18,8 +17,8 @@ public class AccountActivity extends AppActivity {
     protected void onStart(){
         super.onStart();
 
-        if(!isUserLoggedIn()) {
-            goMain();
+        if(!user.isUserLoggedIn()) {
+            menuPrimary.goMain();
         }
     }
 
@@ -27,14 +26,14 @@ public class AccountActivity extends AppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
-        setMenuPrimaryActive(R.id.mn_account);
-        unsetMenuPrimaryClickable(R.id.mn_account);
+        menuPrimary.setMenuActive(R.id.mn_account);
+        menuPrimary.unsetMenuClickable(R.id.mn_account);
 
         btLogout = (Button) findViewById(R.id.button_settings_logout);
     }
 
     private void doLogout(View v){
-        fbauth.signOut();
-        goMain(v);
+        user.logOut();
+        menuPrimary.goMain(v);
     }
 }

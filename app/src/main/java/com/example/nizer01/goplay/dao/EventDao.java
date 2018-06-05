@@ -21,6 +21,7 @@ import java.util.Date;
 
 public class EventDao {
 
+    private static Event event;
     private static ArrayList<Event> eventList = new ArrayList<>();
     private static ArrayList<Event> filteredEventList = new ArrayList<>();
 
@@ -66,7 +67,6 @@ public class EventDao {
         return filteredEventList;
     }
 
-
     public static ArrayList<Event> getEventsByBounds(final LatLngBounds bounds) {
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -98,5 +98,6 @@ public class EventDao {
 
         return filteredEventList;
     }
+
 
 }
