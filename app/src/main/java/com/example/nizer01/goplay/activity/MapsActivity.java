@@ -59,11 +59,7 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
     private PlaceAutoCompleteAdapter placeAutoCompleteAdapter;
     private GoogleApiClient mGoogleApiClient;
 
-    private EventDao database;
-
-    public MapsActivity() {
-        database = new EventDao();
-    }
+    private EventDao database = new EventDao();
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -73,8 +69,8 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
     protected void onStart(){
         super.onStart();
 
-        if(!user.isUserLoggedIn()) {
-            menuPrimary.goMain();
+        if(!isUserLoggedIn()) {
+            goMain();
         }
     }
 
@@ -82,8 +78,8 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        menuPrimary.setMenuActive(R.id.mn_maps);
-        menuPrimary.unsetMenuClickable(R.id.mn_maps);
+        setMenuActive(R.id.mn_maps);
+        unsetMenuClickable(R.id.mn_maps);
 
         mSeatchText = (AutoCompleteTextView) findViewById(R.id.input_search);
 
@@ -116,7 +112,7 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
                 Event ev = (Event) marker.getTag();
                 Bundle bn = new Bundle();
                 bn.putString("id", ev.getId());
-                menuPrimary.goEvent(bn);
+                goEvent(bn);
             }
         });
 

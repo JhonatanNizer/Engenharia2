@@ -17,8 +17,8 @@ public class AccountActivity extends AppActivity {
     protected void onStart(){
         super.onStart();
 
-        if(!user.isUserLoggedIn()) {
-            menuPrimary.goMain();
+        if(!isUserLoggedIn()) {
+            goMain();
         }
     }
 
@@ -26,14 +26,14 @@ public class AccountActivity extends AppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
-        menuPrimary.setMenuActive(R.id.mn_account);
-        menuPrimary.unsetMenuClickable(R.id.mn_account);
+        setMenuActive(R.id.mn_account);
+        unsetMenuClickable(R.id.mn_account);
 
         btLogout = (Button) findViewById(R.id.button_settings_logout);
     }
 
     private void doLogout(View v){
-        user.logOut();
-        menuPrimary.goMain(v);
+        logOut();
+        goMain(v);
     }
 }

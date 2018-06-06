@@ -24,14 +24,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.Map;
 
-abstract public class AppActivity extends AppCompatActivity {
-
-    protected final MenuPrimaryService menuPrimary;
-    protected final UserService user;
-
-    protected AppActivity() {
-        user = new UserService();
-        menuPrimary = new MenuPrimaryService(getApplicationContext());
-    }
+abstract public class AppActivity extends UserService {
 
 }

@@ -19,30 +19,19 @@ import com.example.nizer01.goplay.activity.RegisterActivity;
 
 public class MenuService extends AppCompatActivity {
 
-    protected Context context;
-
-    public MenuService(Context ctx) {
-        context = ctx;
-    }
-
-    public MenuService() {
-        context = this;
-    }
-
-
     public void goActivity(Context context, Class<?> cls) {
-        Intent intent = new Intent(context, cls);
+        Intent intent = new Intent(this, cls);
         startActivity(intent);
     }
     public void goActivity(Context context, Class<?> cls, Bundle bundle) {
-        Intent intent = new Intent(context, cls);
+        Intent intent = new Intent(this, cls);
         intent.putExtras(bundle);
         startActivity(intent);
     }
 
     public void setMenuActive(int id) {
         ImageButton ib = (ImageButton) findViewById(id);
-        ib.setBackgroundColor(ContextCompat.getColor(context, R.color.colorMenuBgPrimaryActive));
+        ib.setBackgroundColor(ContextCompat.getColor(this, R.color.colorMenuBgPrimaryActive));
     }
 
     public void changeMenuClickable(int id, boolean clickable) {

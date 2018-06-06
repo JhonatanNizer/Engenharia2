@@ -21,8 +21,8 @@ public class EventActivity extends AppActivity {
     protected void onStart(){
         super.onStart();
 
-        if(!user.isUserLoggedIn()) {
-            menuPrimary.goMain();
+        if(!isUserLoggedIn()) {
+            goMain();
         }
     }
 
@@ -30,7 +30,7 @@ public class EventActivity extends AppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
-        menuPrimary.setMenuActive(R.id.mn_events);
+        setMenuActive(R.id.mn_events);
 
         eventManager.setEventByIdListener(new OnEventByIdListener() {
             @Override
@@ -40,7 +40,7 @@ public class EventActivity extends AppActivity {
 
             @Override
             public void onNotFinded() {
-                menuPrimary.goMaps();
+                goMaps();
             }
 
             @Override

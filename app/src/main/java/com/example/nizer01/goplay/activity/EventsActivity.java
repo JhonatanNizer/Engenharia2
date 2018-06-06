@@ -24,8 +24,8 @@ public class EventsActivity extends AppActivity {
     protected void onStart(){
         super.onStart();
 
-        if(!user.isUserLoggedIn()) {
-            menuPrimary.goMain();
+        if(!isUserLoggedIn()) {
+            goMain();
         }
     }
 
@@ -33,8 +33,8 @@ public class EventsActivity extends AppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
-        menuPrimary.setMenuActive(R.id.mn_events);
-        menuPrimary.unsetMenuClickable(R.id.mn_events);
+        setMenuActive(R.id.mn_events);
+        unsetMenuClickable(R.id.mn_events);
 
         rvList = findViewById(R.id.rvList);
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);

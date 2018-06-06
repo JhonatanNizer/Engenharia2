@@ -13,8 +13,8 @@ public class HomeActivity extends AppActivity {
     protected void onStart(){
         super.onStart();
 
-        if(!user.isUserLoggedIn()) {
-            menuPrimary.goMain();
+        if(!isUserLoggedIn()) {
+            goMain();
         }
     }
 
@@ -22,7 +22,7 @@ public class HomeActivity extends AppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        menuPrimary.setMenuActive(R.id.mn_dashboard);
-        menuPrimary.unsetMenuClickable(R.id.mn_dashboard);
+        setMenuActive(R.id.mn_dashboard);
+        unsetMenuClickable(R.id.mn_dashboard);
     }
 }

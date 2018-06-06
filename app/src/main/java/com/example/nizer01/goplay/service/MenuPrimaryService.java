@@ -14,10 +14,6 @@ import com.example.nizer01.goplay.activity.RegisterActivity;
 
 public class MenuPrimaryService extends MenuService {
 
-    public MenuPrimaryService(Context applicationContext) {
-        super(applicationContext);
-    }
-
     public void goHome(View view) {
         goHome();
     }

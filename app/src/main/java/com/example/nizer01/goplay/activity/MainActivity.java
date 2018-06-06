@@ -28,8 +28,8 @@ public class MainActivity extends AppActivity {
     protected void onStart(){
         super.onStart();
 
-        if(user.isUserLoggedIn()) {
-            menuPrimary.goMaps();
+        if(!isUserLoggedIn()) {
+            goMaps();
         }
     }
 
@@ -82,7 +82,7 @@ public class MainActivity extends AppActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            menuPrimary.goMaps();
+                            goMaps();
                         } else {
                             Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
