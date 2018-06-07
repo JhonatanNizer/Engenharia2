@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -28,19 +30,16 @@
         </activity>
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.HomeActivity" />
-        <activity android:name=".activity.FinishEventCreationActivity" />
         <activity android:name=".activity.EventsActivity" />
-        <activity android:name=".activity.CreateEventActivity2" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCvPBJX_gpstWX37-mY6kxVnbGtkE1nxko" />
 
-        <activity
-            android:name=".activity.MapsActivity"
-            android:label="@string/title_activity_maps" />
+        <activity android:name=".activity.MapsActivity" />
         <activity android:name=".activity.AccountActivity" />
-        <activity android:name=".activity.EventActivity"></activity>
+        <activity android:name=".activity.EventActivity" />
+        <activity android:name=".activity.AddEventActivity"></activity>
     </application>
 
 </manifest>

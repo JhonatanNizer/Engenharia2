@@ -17,70 +17,61 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
             android:layout_weight="1">
 
             <LinearLayout
-                android:id="@+id/menuCenter"
+                android:id="@+id/contentScroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:orientation="vertical"
                 android:stateListAnimator="@null">
 
-
-                <Button
-                    android:id="@+id/button3"
+                <TextView
+                    android:id="@+id/txHoMyEvents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/button.listevents"
-                    android:textColor="@color/colorSecondaryDark"
-                    android:onClick="onClickListEvents" />
+                    android:layout_marginVertical="10dp"
+                    android:text="Meus Eventos" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_marginVertical="10dp"
+                    android:layout_height="200dp">
+
+                    <LinearLayout
+                        android:id="@+id/lsHoMyEvents"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+
+                </ScrollView>
 
                 <TextView
-                    android:id="@+id/textView_nextEvents"
-                    android:layout_width="0dp"
+                    android:id="@+id/txHoSubscribedEvents"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@color/colorSecondary"
-                    android:text="@string/textview.nextevents"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimary"/>
+                    android:layout_marginVertical="10dp"
+                    android:text="Eventos em que participo" />
 
-                <ListView
-                    android:id="@+id/listView_closeEvents"
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="156dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#ABABAB"
-                    />
+                    android:layout_marginVertical="10dp"
+                    android:layout_height="200dp">
 
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:onClick="onClickCreateEvent"
-                    android:text="Create event"
-                    android:textColor="@color/colorSecondaryDark"
-                    />
+                    <LinearLayout
+                        android:id="@+id/lsHoSubscribedEvents"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                    </LinearLayout>
 
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_height="48dp"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="32dp"
-                    android:text="Button"
-                    android:onClick="onClickEvento"/>
+                </ScrollView>
+
             </LinearLayout>
 
         </ScrollView>

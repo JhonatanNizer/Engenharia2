@@ -1,6 +1,8 @@
 package com.example.nizer01.goplay.service;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -9,39 +11,56 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.nizer01.goplay.R;
-import com.example.nizer01.goplay.activity.AccountActivity;
-import com.example.nizer01.goplay.activity.EventActivity;
-import com.example.nizer01.goplay.activity.EventsActivity;
-import com.example.nizer01.goplay.activity.HomeActivity;
-import com.example.nizer01.goplay.activity.MainActivity;
-import com.example.nizer01.goplay.activity.MapsActivity;
-import com.example.nizer01.goplay.activity.RegisterActivity;
 
 public class MenuService extends AppCompatActivity {
 
-    public void goActivity(Context context, Class<?> cls) {
-        Intent intent = new Intent(this, cls);
-        startActivity(intent);
+    protected AppCompatActivity activity;
+
+    public MenuService(AppCompatActivity act) {
+        activity = act;
     }
-    public void goActivity(Context context, Class<?> cls, Bundle bundle) {
-        Intent intent = new Intent(this, cls);
+
+    public void goToActivity(Class<?> cls) {
+        Intent intent = new Intent(activity, cls);
+        activity.startActivity(intent);
+    }
+    public void goToActivity(Class<?> cls, Bundle bundle) {
+        Intent intent = new Intent(activity, cls);
         intent.putExtras(bundle);
-        startActivity(intent);
+        activity.startActivity(intent);
     }
 
     public void setMenuActive(int id) {
-        ImageButton ib = (ImageButton) findViewById(id);
-        ib.setBackgroundColor(ContextCompat.getColor(this, R.color.colorMenuBgPrimaryActive));
+        ImageButton ib = (ImageButton) activity.findViewById(id);
+        ib.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorMenuBgPrimaryActive));
     }
 
     public void changeMenuClickable(int id, boolean clickable) {
-        ImageButton ib = (ImageButton) findViewById(id);
+        ImageButton ib = (ImageButton) activity.findViewById(id);
         ib.setClickable(clickable);
+    }
+    public void changeMenuFocusable(int id, boolean focusable) {
+        ImageButton ib = (ImageButton) activity.findViewById(id);
+        ib.setFocusable(focusable);
+    }
+    public void changeMenuFocusableInTouchMode(int id, boolean focusable) {
+        ImageButton ib = (ImageButton) activity.findViewById(id);
+        ib.setFocusableInTouchMode(focusable);
     }
     public void unsetMenuClickable(int id) {
         changeMenuClickable(id, false);
     }
     public void setMenuClickable(int id) {
         changeMenuClickable(id, true);
+    }
+
+    public void setMenuBackgroundColor(int id, int color) {
+        ImageButton ib = (ImageButton) activity.findViewById(id);
+        ib.setBackgroundTintList(ContextCompat.getColorStateList(activity, color));
+    }
+
+    public void setMenuColor(int id, int color) {
+        ImageButton ib = (ImageButton) activity.findViewById(id);
+        ib.setColorFilter(ContextCompat.getColor(activity, color));
     }
 }

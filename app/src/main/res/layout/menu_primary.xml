@@ -18,7 +18,7 @@
         android:background="@color/colorMenuBgPrimary"
         android:elevation="0dp"
         android:scaleType="fitXY"
-        android:onClick="goHome"
+        android:onClick="goToHome"
         android:src="@drawable/ic_bookmark_border"
         android:tint="@color/colorMenuIconPrimary" />
 
@@ -37,7 +37,7 @@
         android:clickable="true"
         android:elevation="0dp"
         android:scaleType="fitXY"
-        android:onClick="goEvents"
+        android:onClick="goToEvents"
         android:src="@drawable/ic_event_note"
         android:tint="@color/colorMenuIconPrimary"/>
 
@@ -55,7 +55,7 @@
         android:background="@color/colorMenuBgPrimary"
         android:elevation="0dp"
         android:scaleType="fitXY"
-        android:onClick="goMaps"
+        android:onClick="goToMaps"
         android:src="@drawable/ic_place"
         android:tint="@color/colorMenuIconPrimary"/>
 
@@ -91,7 +91,7 @@
         android:background="@color/colorMenuBgPrimary"
         android:clickable="true"
         android:elevation="0dp"
-        android:onClick="goAccount"
+        android:onClick="goToAccount"
         android:scaleType="fitXY"
         android:src="@drawable/ic_person"
         android:tint="@color/colorMenuIconPrimary"/>

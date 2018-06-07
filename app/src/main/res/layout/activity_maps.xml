@@ -55,23 +55,26 @@
         android:layout_alignBottom="@id/map"
         android:layout_marginBottom="60dp"
         android:paddingHorizontal="20dp"
+        android:clickable="true"
         android:fillViewport="true"
         android:orientation="vertical">
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/btEvAddEvent"
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:padding="2dp"
             android:background="@drawable/bt_action_rounded"
-            android:clickable="true"
-            android:focusable="true"
+            android:backgroundTint="@color/colorMenuBgPrimaryDisabled"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:elevation="0dp"
             android:scaleType="fitXY"
-            android:onClick="onClickCreateEvent"
+            android:onClick="doAddEvent"
             android:stateListAnimator="@null"
             android:src="@drawable/ic_add"
-            android:tint="@color/colorMenuIconPrimary"/>
+            android:tint="@color/colorMenuIconPrimaryDisabled"/>
 
     </LinearLayout>
 

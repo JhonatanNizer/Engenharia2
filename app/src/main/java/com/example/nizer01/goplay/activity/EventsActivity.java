@@ -1,56 +1,111 @@
 package com.example.nizer01.goplay.activity;
 
 import android.content.DialogInterface;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.nizer01.goplay.R;
-import com.example.nizer01.goplay.dao.EventDao;
-import com.example.nizer01.goplay.utility.EventAdapter;
+import com.example.nizer01.goplay.domain.Event;
+import com.example.nizer01.goplay.listeners.OnGetEventsListener;
+import com.example.nizer01.goplay.service.EventService;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class EventsActivity extends AppActivity {
 
-    String m_Text = "";
-    EventAdapter adapter;
-    RecyclerView rvList;
-
-    @Override
-    protected void onStart(){
-        super.onStart();
-
-        if(!isUserLoggedIn()) {
-            goMain();
-        }
-    }
+    EventService eventManager = new EventService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        onCreateStartServices(this);
+        onCreateUserNotIsLoggedInRedirectToMain();
+
         setContentView(R.layout.activity_events);
+
         setMenuActive(R.id.mn_events);
         unsetMenuClickable(R.id.mn_events);
 
-        rvList = findViewById(R.id.rvList);
-        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
-
-        adapter = new EventAdapter(EventDao.getFireBaseEvents());
-        rvList.setAdapter(adapter);
-        rvList.setLayoutManager(new LinearLayoutManager(this));
+        setEventsByTime(1);
     }
 
-    public void updateList(String filter) {
-        adapter = new EventAdapter(EventDao.getFilteredEvents(filter));
-        rvList.setAdapter(adapter);
-        rvList.setLayoutManager(new LinearLayoutManager(this));
+    public void setEventsByTime(int time) {
+        eventManager.onGetEventsByStartTime(time, new OnGetEventsListener() {
+            @Override
+            public void onFinded(ArrayList<Event> evs) {
+                setEventItems(evs);
+            }
+
+            @Override
+            public void onNotFinded() {
+                goToMaps();
+            }
+
+            @Override
+            public void onError(Object er) {
+
+            }
+        });
     }
 
-    public void onClickFilter(View view) {
+    public void setEventByActivity(final String activity) {
+        eventManager.onGetEventsByActivity(activity, new OnGetEventsListener() {
+            @Override
+            public void onFinded(ArrayList<Event> evs) {
+                setEventItems(evs);
+            }
+
+            @Override
+            public void onNotFinded() {
+                System.out.println("Events with activity " + activity + " not founded!");
+                setEventsByTime(1);
+            }
+
+            @Override
+            public void onError(Object er) {
+
+            }
+        });
+    }
+
+    public void clearEventItems() {
+        LinearLayout ll = findViewById(R.id.lsEvents);
+        ll.removeAllViewsInLayout();
+    }
+
+    public void setEventItems(ArrayList<Event> evs) {
+
+        LinearLayout ll = findViewById(R.id.lsEvents);
+
+        for (Event ev: evs) {
+             ll.addView(getEventItemView(getLayoutInflater().inflate(R.layout.activity_events_item, null), ev));
+        }
+    }
+
+    public View getEventItemView(View view, Event ev) {
+        Bundle bn = new Bundle();
+        bn.putString("id", ev.getId());
+        (view.findViewById(R.id.lsEventsItem)).setTag(bn);
+        ((TextView) view.findViewById(R.id.txEvItTitle)).setText(ev.getName());
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy 'às' hh:mm");
+
+        ((TextView) view.findViewById(R.id.txEvItDate)).setText(dateFormat.format(ev.getStartTime()).toString());
+        ((TextView) view.findViewById(R.id.txEvItActivity)).setText(ev.getActivity().getName());
+        ((TextView) view.findViewById(R.id.txEvItCity)).setText("Local: " + ev.getLocal().getCity());
+
+        return view;
+    }
+
+    public void doFilter(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Filter by Activity");
         final EditText input = new EditText(this);
@@ -59,8 +114,8 @@ public class EventsActivity extends AppActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                m_Text = input.getText().toString();
-                updateList(m_Text);
+                clearEventItems();
+                setEventByActivity(input.getText().toString());
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

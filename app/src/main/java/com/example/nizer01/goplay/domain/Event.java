@@ -6,10 +6,11 @@ import java.util.ArrayList;
 public class Event {
 
     private String id;
+    private String uid;
     private String name;
     private String description;
     private String requirements;
-    private String cost;
+    private String investiments;
     private Long startTime;
     private Long duration;
     private Long endTime;
@@ -19,7 +20,8 @@ public class Event {
     private Activity activity;
     private Local local;
 
-    private ArrayList<Profile> profiles;
+    private ArrayList<Profile> profiles = new ArrayList<>();
+    private ArrayList<String> puids = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -89,14 +91,6 @@ public class Event {
         this.minPlayers = minPlayers;
     }
 
-    public String getInvestiments() {
-        return cost;
-    }
-
-    public void setInvestiments(String cost) {
-        this.cost = cost;
-    }
-
     public Activity getActivity() { return activity; }
 
     public void setActivity(Activity activity) { this.activity = activity; }
@@ -117,5 +111,37 @@ public class Event {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getInvestiments() {
+        return investiments;
+    }
+
+    public void setInvestiments(String investiments) {
+        this.investiments = investiments;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public void setPuids(ArrayList<String> puids) {
+        this.puids = puids;
+    }
+
+    public void addPuid(String puid) {
+        this.puids.add(puid);
+    }
+
+    public void removePuid(String puid) {
+        this.puids.remove(puid);
+    }
+
+    public ArrayList<String> getPuids() {
+        return puids;
     }
 }

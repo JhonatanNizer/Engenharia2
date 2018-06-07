@@ -4,16 +4,19 @@ import java.sql.Timestamp;
 
 public class Profile {
 
+    private String id;
     private String firstName;
     private String lastName;
-    private Timestamp birthDate;
+    private long birthDate;
+    private String email;
     private String gender;
 
-    public void Profile(String firstName, String lastName, Timestamp birthDate, String gender){
+    public void Profile(String firstName, String lastName, long birthDate, String gender, String email){
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.gender = gender;
+        this.email = email;
     }
 
     public String getFirstName() {
@@ -32,11 +35,11 @@ public class Profile {
         this.lastName = lastName;
     }
 
-    public Timestamp getBirthDate() {
+    public long getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Timestamp birthDate) {
+    public void setBirthDate(long birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -46,4 +49,19 @@ public class Profile {
 
     public void setGender(String gender) { this.gender = gender; }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }

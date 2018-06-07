@@ -25,17 +25,11 @@ public class MainActivity extends AppActivity {
     private final FirebaseAuth fbAuth = FirebaseAuth.getInstance();
 
     @Override
-    protected void onStart(){
-        super.onStart();
-
-        if(!isUserLoggedIn()) {
-            goMaps();
-        }
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        onCreateStartServices(this);
+        onCreateUserIsLoggedInRedirectToStart();
+
         setContentView(R.layout.activity_main);
 
         etEmail = (EditText) findViewById(R.id.edittext_main_email);
@@ -82,7 +76,7 @@ public class MainActivity extends AppActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            goMaps();
+                            goToMaps();
                         } else {
                             Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }

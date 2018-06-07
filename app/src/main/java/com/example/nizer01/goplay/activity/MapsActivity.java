@@ -1,7 +1,6 @@
 package com.example.nizer01.goplay.activity;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -15,9 +14,10 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
-import com.example.nizer01.goplay.dao.EventDao;
 import com.example.nizer01.goplay.domain.Event;
 import com.example.nizer01.goplay.domain.Local;
+import com.example.nizer01.goplay.listeners.OnGetEventsListener;
+import com.example.nizer01.goplay.service.EventService;
 import com.example.nizer01.goplay.utility.PlaceAutoCompleteAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -40,7 +40,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity extends AppActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
+public class MapsActivity extends AppActivity implements OnMapReadyCallback {
 
     private static final String TAG = "MapsActivity";
 
@@ -59,27 +59,22 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
     private PlaceAutoCompleteAdapter placeAutoCompleteAdapter;
     private GoogleApiClient mGoogleApiClient;
 
-    private EventDao database = new EventDao();
+    EventService eventManager = new EventService();
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-    }
-
-    @Override
-    protected void onStart(){
-        super.onStart();
-
-        if(!isUserLoggedIn()) {
-            goMain();
-        }
-    }
+    protected Local currentLocal;
+    protected Marker currentMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        onCreateStartServices(this);
+        onCreateUserNotIsLoggedInRedirectToMain();
+
         setMenuActive(R.id.mn_maps);
         unsetMenuClickable(R.id.mn_maps);
+        unsetMenuClickable(R.id.btEvAddEvent);
 
         mSeatchText = (AutoCompleteTextView) findViewById(R.id.input_search);
 
@@ -112,29 +107,48 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
                 Event ev = (Event) marker.getTag();
                 Bundle bn = new Bundle();
                 bn.putString("id", ev.getId());
-                goEvent(bn);
+                goToEvent(bn);
             }
         });
 
         mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             @Override
             public void onCameraMove() {
-                for (Event ev : database.getEventsByBounds(mMap.getProjection().getVisibleRegion().latLngBounds)) {
-
-                    Local lc = ev.getLocal();
-                    MarkerOptions mo = new MarkerOptions()
-                            .position(new LatLng(lc.getLatitude(), lc.getLongitude()))
-                            .title(ev.getName())
-                            .snippet(ev.getDescription());
-
-                    Marker mk = mMap.addMarker(mo);
-
-                    mk.setTag(ev);
-                }
+                setEventLocations(mMap.getProjection().getVisibleRegion().latLngBounds);
             }
         });
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this).addApi(Places.GEO_DATA_API).addApi(Places.PLACE_DETECTION_API).enableAutoManage(this, this).build();
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                if(currentMarker != null) {
+                    currentMarker.remove();
+                }
+
+                currentMarker = mMap.addMarker(new MarkerOptions().position(latLng));
+
+                setMenuClickable(R.id.btEvAddEvent);
+                setMenuBackgroundColor(R.id.btEvAddEvent, R.color.colorMenuBgPrimary);
+                setMenuColor(R.id.btEvAddEvent, R.color.colorMenuIconPrimary);
+            }
+        });
+
+        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                setEventLocations(mMap.getProjection().getVisibleRegion().latLngBounds);
+            }
+        });
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+                    }
+                }).build();
 
         placeAutoCompleteAdapter = new PlaceAutoCompleteAdapter(this, mGoogleApiClient, LAT_LNG_BOUNDS, null);
 
@@ -164,7 +178,35 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
         });
     }
 
+    protected void setEventLocations(final LatLngBounds latLngBounds) {
+        eventManager.onGetEventsByLocalBounds(latLngBounds, new OnGetEventsListener() {
+            @Override
+            public void onFinded(ArrayList<Event> evs) {
+                for (Event ev : evs) {
 
+                    Local lc = ev.getLocal();
+                    MarkerOptions mo = new MarkerOptions()
+                            .position(new LatLng(lc.getLatitude(), lc.getLongitude()))
+                            .title(ev.getName())
+                            .snippet(ev.getDescription());
+
+                    Marker mk = mMap.addMarker(mo);
+
+                    mk.setTag(ev);
+                }
+            }
+
+            @Override
+            public void onNotFinded() {
+
+            }
+
+            @Override
+            public void onError(Object er) {
+
+            }
+        });
+    }
 
     private void geolocate() {
         String searchString = mSeatchText.getText().toString();
@@ -196,6 +238,7 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
             }
 
             mMap.setMyLocationEnabled(true);
+            setEventLocations(mMap.getProjection().getVisibleRegion().latLngBounds);
 
             init();
         }
@@ -219,7 +262,7 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
                             Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-26.91621, -48.6641), DEFAULT_ZOOM));
-                            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+
                             Toast.makeText(MapsActivity.this, "Unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -233,18 +276,6 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
     private void moveCamera(LatLng latlng, float zoom, String addressline) {
         System.out.println(TAG + " moveCamera: moving the camera to: Lat: " + latlng.latitude + ", Lon: " + latlng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, zoom));
-        if (!addressline.equals("MyLocation")) {
-            mMap.addMarker(new MarkerOptions().position(latlng).title(addressline));
-        }
-
-
-
-        System.out.println(mMap.getProjection().getVisibleRegion().latLngBounds.northeast);
-        System.out.println(mMap.getProjection().getVisibleRegion().latLngBounds.southwest);
-    }
-
-    public void queryMarkers(LatLngBounds bounds) {
-
     }
 
     private void initMap() {
@@ -286,20 +317,42 @@ public class MapsActivity extends AppActivity implements OnMapReadyCallback, Goo
         }
     }
 
-    public void onClickCreateEvent(View v) {
-        Intent intent = new Intent(this, CreateEventActivity2.class);
+    public void doAddEvent(View view) {
+        Bundle bundle = new Bundle();
+        Address address = getLocationFromLatLng(currentMarker.getPosition().latitude, currentMarker.getPosition().longitude);
 
-        String citySelected = "";
-        String addressSelected = "";
+        bundle.putDouble("latitude", currentMarker.getPosition().latitude);
+        bundle.putDouble("longitude", currentMarker.getPosition().longitude);
 
-        if(!addressSelected.isEmpty()) {
-            addressSelected = address.getAddressLine(0);
-            citySelected = address.getSubAdminArea();
+        if(address != null) {
+            if(address.getLocality() != null) {
+                bundle.putString("city", address.getLocality());
+            }
+
+            if(address.getAddressLine(0) != null) {
+                bundle.putString("local", address.getThoroughfare() + ", " + address.getSubThoroughfare() + " " + address.getSubLocality());
+            }
         }
 
-        intent.putExtra("City", citySelected);
-        intent.putExtra("Local", addressSelected);
-        startActivity(intent);
-        finish();
+        goToAddEvent(bundle);
+    }
+
+    public Address getLocationFromLatLng(double latitude, double longitude) {
+
+        Geocoder geocoder = new Geocoder(MapsActivity.this);
+        List<Address> addresses = new ArrayList<>();
+
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude,1);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        if(addresses != null || addresses.size() > 0) {
+            return addresses.get(0);
+
+        }
+
+        return null;
     }
 }

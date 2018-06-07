@@ -1,23 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<LinearLayout
+    android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.AccountActivity">
+    android:layout_alignParentBottom="true"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    android:stateListAnimator="@null">
 
-    <Button
-        android:id="@+id/button_settings_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="LogOut"
-        android:onClick="doLogout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:padding="10dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/contentScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical"
+            android:stateListAnimator="@null">
+
+            <TextView
+                android:id="@+id/txStMyAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="Minha Conta" />
+
+            <TextView
+                android:id="@+id/txStUid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="Minha id"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/txStFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="Meu nome" />
+
+            <TextView
+                android:id="@+id/txStEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="Meu email" />
+
+            <Button
+                android:id="@+id/button_settings_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="LogOut"
+                android:onClick="doLogout" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
     <LinearLayout
         android:id="@+id/menuBottom"
@@ -31,4 +84,7 @@
         <include layout="@layout/menu_primary" />
 
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+
+</LinearLayout>
+
+</RelativeLayout>
