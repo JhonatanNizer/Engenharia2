@@ -41,7 +41,7 @@ public class EventsActivity extends AppActivity {
         eventManager.onGetEventsByStartTime(time, new OnGetEventsListener() {
             @Override
             public void onFinded(ArrayList<Event> evs) {
-                setEventItems(evs);
+                clearEventItems(); setEventItems(evs);
             }
 
             @Override
@@ -60,12 +60,11 @@ public class EventsActivity extends AppActivity {
         eventManager.onGetEventsByActivity(activity, new OnGetEventsListener() {
             @Override
             public void onFinded(ArrayList<Event> evs) {
-                setEventItems(evs);
+                clearEventItems(); setEventItems(evs);
             }
 
             @Override
             public void onNotFinded() {
-                System.out.println("Events with activity " + activity + " not founded!");
                 setEventsByTime(1);
             }
 

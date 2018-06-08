@@ -114,7 +114,7 @@ public class RegisterActivity extends AppActivity implements View.OnClickListene
                 !email.equals("") &&
                 !password.equals("") &&
                 !passwordrepeat.equals("") &&
-                !birthday.equals("") &&
+                !birthday.equals("")&&
                 !gender.equals("")) {
             if (password.equals(passwordrepeat)) {
                 if(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -134,6 +134,13 @@ public class RegisterActivity extends AppActivity implements View.OnClickListene
 
     private void onClickButtonBack() {
         finish();
+    }
+
+    private boolean isBirthdayValid(String birthday){
+
+
+
+        return true;
     }
 
     private void createAccountObject(String email, String password) {

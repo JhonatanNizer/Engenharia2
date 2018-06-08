@@ -102,7 +102,6 @@ abstract public class AppActivity extends AppCompatActivity {
         menuManager.goToActivity(AddEventActivity.class);
     }
 
-
     protected void goToMaps(View view) {
         goToMaps();
     }

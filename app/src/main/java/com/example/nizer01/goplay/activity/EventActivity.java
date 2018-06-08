@@ -77,6 +77,10 @@ public class EventActivity extends AppActivity {
             @Override
             public void onFinded(Profile pf) {
 
+                if(!event.getPuids().contains(pf.getId())) {
+                    Button button = findViewById(R.id.btEvParticipate);
+                    button.setVisibility(button.VISIBLE);
+                }
             }
 
             @Override
