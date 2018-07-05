@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nizer01.goplay.R;
@@ -23,6 +24,8 @@ public class MainActivity extends AppActivity {
     private Button btLogin;
     private Button btRegister;
 
+    private TextView tvTest;
+
     private final FirebaseAuth fbAuth = FirebaseAuth.getInstance();
 
     @Override
@@ -37,6 +40,8 @@ public class MainActivity extends AppActivity {
         etPassword = (EditText) findViewById(R.id.edittext_main_password);
         btLogin = (Button) findViewById(R.id.button_main_login);
         btRegister = (Button) findViewById(R.id.button_main_register);
+
+        tvTest = findViewById(R.id.textView_test);
     }
 
     private boolean isValidPassword(CharSequence string) {
@@ -77,8 +82,10 @@ public class MainActivity extends AppActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            goToMaps();
+                            tvTest.setText("Sucesso!");
+                            //goToMaps();
                         } else {
+                            tvTest.setText("Fracasso!");
                             Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
