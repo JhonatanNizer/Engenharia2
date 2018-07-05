@@ -43,7 +43,7 @@ public class MainActivityTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(60000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -66,10 +66,10 @@ public class MainActivityTest {
                                         1),
                                 1),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("jhonatan.nizer@hotmail.com"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("jhonatan@gmail.com"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.edittext_main_email), withText("jhonatan.nizer@hotmail.com"),
+                allOf(withId(R.id.edittext_main_email), withText("jhonatan@gmail.com"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.RelativeLayout")),
@@ -86,10 +86,10 @@ public class MainActivityTest {
                                         1),
                                 2),
                         isDisplayed()));
-        appCompatEditText4.perform(replaceText("Apmt1603@"), closeSoftKeyboard());
+        appCompatEditText4.perform(replaceText("12345678"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText5 = onView(
-                allOf(withId(R.id.edittext_main_password), withText("Apmt1603@"),
+                allOf(withId(R.id.edittext_main_password), withText("12345678"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.RelativeLayout")),

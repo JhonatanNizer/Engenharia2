@@ -25,7 +25,6 @@ public class HomeActivity extends AppActivity {
         onCreateStartServices();
         onCreateUserNotIsLoggedInRedirectToMain();
 
-
         setMenuActive(R.id.mn_dashboard);
         unsetMenuClickable(R.id.mn_dashboard);
 

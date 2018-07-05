@@ -116,12 +116,14 @@ abstract public class AppActivity extends AppCompatActivity {
         menuManager.goToActivity(MainActivity.class);
     }
 
+    /*
     protected void goToRegister(View view) {
         goToRegister();
     }
     protected void goToRegister() {
         menuManager.goToActivity(RegisterActivity.class);
     }
+    */
 
     protected void goBack() {
         finishActivity(0);

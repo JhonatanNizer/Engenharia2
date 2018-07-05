@@ -137,9 +137,6 @@ public class RegisterActivity extends AppActivity implements View.OnClickListene
     }
 
     private boolean isBirthdayValid(String birthday){
-
-
-
         return true;
     }
 
